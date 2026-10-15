@@ -12,8 +12,6 @@ const Input = z.object({
 export const aiPiiReview = createServerFn({ method: "POST" })
   .validator((d: unknown) => Input.parse(d))
   .handler(async ({ data }) => {
-    console.log("[ai-pii] handler start", data.columns.length, !!process.env["LOVABLE_API_KEY"]);
-    const t0 = Date.now(); try { const r = await fetch("https://ai.gateway.lovable.dev/v1/models", { headers: { Authorization: `Bearer ${process.env["LOVABLE_API_KEY"]}` } }); console.log("[ai-pii] models", r.status, Date.now() - t0); } catch (e) { console.log("[ai-pii] models err", String(e)); }
     const { runAiPiiReview } = await import("./ai-pii.server");
     try {
       return { ok: true as const, review: await runAiPiiReview({ columns: data.columns }) };
