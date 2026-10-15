@@ -63,7 +63,7 @@ export function detectPii(rows: Row[], columns: string[]): Finding[] {
       const t = classifyValue(String(r[col] ?? ""));
       if (t) counts[t] = (counts[t] ?? 0) + 1;
     }
-    if (NAME_HEADER.test(col) && !/(company|file|user)/i.test(col)) {
+    if (NAME_HEADER.test(col) && !/(company|file|user|bank|branch|trade)/i.test(col)) {
       const n = rows.filter((r) => /^[A-Za-z][A-Za-z' .-]+$/.test(String(r[col] ?? "").trim())).length;
       if (n) counts.name = (counts.name ?? 0) + n;
     }
