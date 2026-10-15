@@ -2,9 +2,9 @@ import type { State } from "./store";
 
 export const PLANS = {
   trial: { name: "Free Trial", price: 0, note: "14 days", scans: 20, storageGb: 1, seats: 2, dbs: 0, workflows: "Core", audit: "30-day log", integrations: "—", support: "Docs" },
-  starter: { name: "Starter", price: 49, note: "/month", scans: 200, storageGb: 10, seats: 5, dbs: 1, workflows: "Core + Policies", audit: "6-month log", integrations: "CSV/XLSX", support: "Email" },
-  professional: { name: "Professional", price: 149, note: "/month", scans: 1000, storageGb: 50, seats: 15, dbs: 3, workflows: "All workflows", audit: "2-year log + export", integrations: "PostgreSQL, storage", support: "Priority email" },
-  enterprise: { name: "Enterprise", price: null as number | null, note: "Custom", scans: 99999, storageGb: 500, seats: 100, dbs: 20, workflows: "All + custom", audit: "Unlimited + SIEM", integrations: "Custom", support: "Dedicated manager" },
+  starter: { name: "Basic", price: 49, note: "/month", scans: 200, storageGb: 10, seats: 5, dbs: 1, workflows: "Core + Policies", audit: "6-month log", integrations: "CSV/XLSX", support: "Email" },
+  professional: { name: "Standard", price: 99, note: "/month", scans: 1000, storageGb: 50, seats: 15, dbs: 3, workflows: "All workflows", audit: "2-year log + export", integrations: "PostgreSQL, storage", support: "Priority email" },
+  enterprise: { name: "Premium", price: 199 as number | null, note: "/month", scans: 99999, storageGb: 500, seats: 100, dbs: 20, workflows: "All + custom", audit: "Unlimited + SIEM", integrations: "Custom", support: "Dedicated manager" },
 } as const;
 
 export const seed = (): State => ({
