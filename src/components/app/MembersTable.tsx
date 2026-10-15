@@ -17,10 +17,10 @@ export function MembersTable({ seatLimit, editableRoles }: { seatLimit?: number;
   const [role, setRole] = useState<Role>("Business User");
   const full = seatLimit !== undefined && members.length >= seatLimit;
   function invite() {
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return toast.error("Enter a valid email");
-    if (members.some((m) => m.email === email)) return toast.error("Already a member");
-    if (full) return toast.error("No seats available on your plan");
-    setState((s) => ({ members: [...s.members, { id: uid(), name: email.split("@")[0], email, role, status: "Invited" }] }));
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { toast.error("Enter a valid email"); return; }
+    if (members.some((m) => m.email === email)) { toast.error("Already a member"); return; }
+    if (full) { toast.error("No seats available on your plan"); return; }
+    setState((s) => ({ members: [...s.members, { id: uid(), name: email.split("@")[0] ?? email, email, role, status: "Invited" }] }));
     setEmail(""); toast.success("Invitation recorded", { description: "Email delivery is not connected; no email was sent." });
   }
   return (
@@ -34,7 +34,7 @@ export function MembersTable({ seatLimit, editableRoles }: { seatLimit?: number;
       <Table><TableHeader><TableRow><TableHead>Name</TableHead><TableHead>Email</TableHead><TableHead>Role</TableHead><TableHead>Status</TableHead><TableHead /></TableRow></TableHeader>
         <TableBody>{members.map((m) => (
           <TableRow key={m.id}><TableCell className="font-medium">{m.name}</TableCell><TableCell className="text-xs">{m.email}</TableCell>
-            <TableCell>{editableRoles && can ? <Select value={m.role} onValueChange={(v) => { if (m.role === "Admin" && members.filter((x) => x.role === "Admin").length === 1) return toast.error("At least one Admin is required"); setState((s) => ({ members: s.members.map((x) => (x.id === m.id ? { ...x, role: v as Role } : x)) })); toast.success("Role updated"); }}><SelectTrigger className="h-8 w-44"><SelectValue /></SelectTrigger><SelectContent>{ROLES.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent></Select> : m.role}</TableCell>
+            <TableCell>{editableRoles && can ? <Select value={m.role} onValueChange={(v) => { if (m.role === "Admin" && members.filter((x) => x.role === "Admin").length === 1) { toast.error("At least one Admin is required"); return; } setState((s) => ({ members: s.members.map((x) => (x.id === m.id ? { ...x, role: v as Role } : x)) })); toast.success("Role updated"); }}><SelectTrigger className="h-8 w-44"><SelectValue /></SelectTrigger><SelectContent>{ROLES.map((r) => <SelectItem key={r} value={r}>{r}</SelectItem>)}</SelectContent></Select> : m.role}</TableCell>
             <TableCell><Status value={m.status} /></TableCell>
             <TableCell><Button size="icon" variant="ghost" disabled={!can || m.id === "m1"} aria-label="Remove" onClick={() => { setState((s) => ({ members: s.members.filter((x) => x.id !== m.id) })); toast("Member removed"); }}><Trash2 className="h-4 w-4 text-destructive" /></Button></TableCell></TableRow>
         ))}</TableBody></Table>

@@ -97,7 +97,7 @@ export function downloadFile(name: string, content: BlobPart, mime = "text/csv")
 
 export function toCsv(rows: Record<string, unknown>[]) {
   if (!rows.length) return "";
-  const cols = Object.keys(rows[0]);
+  const cols = Object.keys(rows[0]!);
   const esc = (v: unknown) => {
     const s = String(v ?? "");
     return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;

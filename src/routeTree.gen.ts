@@ -22,6 +22,12 @@ import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as SecurityQuestionnaireRouteImport } from './routes/security-questionnaire'
 import { Route as SuppliersRouteImport } from './routes/suppliers'
 import { Route as TrustCenterRouteImport } from './routes/trust-center'
+import { Route as SettingsIntegrationsRouteImport } from './routes/settings.integrations'
+import { Route as SettingsNotificationsRouteImport } from './routes/settings.notifications'
+import { Route as SettingsOrganisationRouteImport } from './routes/settings.organisation'
+import { Route as SettingsProfileRouteImport } from './routes/settings.profile'
+import { Route as SettingsSecurityRouteImport } from './routes/settings.security'
+import { Route as SettingsTeamRouteImport } from './routes/settings.team'
 import { Route as SourcesDatabaseRouteImport } from './routes/sources.database'
 import { Route as SourcesDocumentsRouteImport } from './routes/sources.documents'
 import { Route as SubscriptionIndexRouteImport } from './routes/subscription.index'
@@ -95,6 +101,36 @@ const TrustCenterRoute = TrustCenterRouteImport.update({
   path: '/trust-center',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SettingsIntegrationsRoute = SettingsIntegrationsRouteImport.update({
+  id: '/settings/integrations',
+  path: '/settings/integrations',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsNotificationsRoute = SettingsNotificationsRouteImport.update({
+  id: '/settings/notifications',
+  path: '/settings/notifications',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsOrganisationRoute = SettingsOrganisationRouteImport.update({
+  id: '/settings/organisation',
+  path: '/settings/organisation',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsProfileRoute = SettingsProfileRouteImport.update({
+  id: '/settings/profile',
+  path: '/settings/profile',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsSecurityRoute = SettingsSecurityRouteImport.update({
+  id: '/settings/security',
+  path: '/settings/security',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SettingsTeamRoute = SettingsTeamRouteImport.update({
+  id: '/settings/team',
+  path: '/settings/team',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SourcesDatabaseRoute = SourcesDatabaseRouteImport.update({
   id: '/sources/database',
   path: '/sources/database',
@@ -145,6 +181,12 @@ export interface FileRoutesByFullPath {
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
   '/suppliers': typeof SuppliersRoute
   '/trust-center': typeof TrustCenterRoute
+  '/settings/integrations': typeof SettingsIntegrationsRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
+  '/settings/organisation': typeof SettingsOrganisationRoute
+  '/settings/profile': typeof SettingsProfileRoute
+  '/settings/security': typeof SettingsSecurityRoute
+  '/settings/team': typeof SettingsTeamRoute
   '/sources/database': typeof SourcesDatabaseRoute
   '/sources/documents': typeof SourcesDocumentsRoute
   '/subscription/invoices': typeof SubscriptionInvoicesRoute
@@ -167,6 +209,12 @@ export interface FileRoutesByTo {
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
   '/suppliers': typeof SuppliersRoute
   '/trust-center': typeof TrustCenterRoute
+  '/settings/integrations': typeof SettingsIntegrationsRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
+  '/settings/organisation': typeof SettingsOrganisationRoute
+  '/settings/profile': typeof SettingsProfileRoute
+  '/settings/security': typeof SettingsSecurityRoute
+  '/settings/team': typeof SettingsTeamRoute
   '/sources/database': typeof SourcesDatabaseRoute
   '/sources/documents': typeof SourcesDocumentsRoute
   '/subscription/invoices': typeof SubscriptionInvoicesRoute
@@ -190,6 +238,12 @@ export interface FileRoutesById {
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
   '/suppliers': typeof SuppliersRoute
   '/trust-center': typeof TrustCenterRoute
+  '/settings/integrations': typeof SettingsIntegrationsRoute
+  '/settings/notifications': typeof SettingsNotificationsRoute
+  '/settings/organisation': typeof SettingsOrganisationRoute
+  '/settings/profile': typeof SettingsProfileRoute
+  '/settings/security': typeof SettingsSecurityRoute
+  '/settings/team': typeof SettingsTeamRoute
   '/sources/database': typeof SourcesDatabaseRoute
   '/sources/documents': typeof SourcesDocumentsRoute
   '/subscription/invoices': typeof SubscriptionInvoicesRoute
@@ -214,6 +268,12 @@ export interface FileRouteTypes {
     | '/security-questionnaire'
     | '/suppliers'
     | '/trust-center'
+    | '/settings/integrations'
+    | '/settings/notifications'
+    | '/settings/organisation'
+    | '/settings/profile'
+    | '/settings/security'
+    | '/settings/team'
     | '/sources/database'
     | '/sources/documents'
     | '/subscription/invoices'
@@ -236,6 +296,12 @@ export interface FileRouteTypes {
     | '/security-questionnaire'
     | '/suppliers'
     | '/trust-center'
+    | '/settings/integrations'
+    | '/settings/notifications'
+    | '/settings/organisation'
+    | '/settings/profile'
+    | '/settings/security'
+    | '/settings/team'
     | '/sources/database'
     | '/sources/documents'
     | '/subscription/invoices'
@@ -258,6 +324,12 @@ export interface FileRouteTypes {
     | '/security-questionnaire'
     | '/suppliers'
     | '/trust-center'
+    | '/settings/integrations'
+    | '/settings/notifications'
+    | '/settings/organisation'
+    | '/settings/profile'
+    | '/settings/security'
+    | '/settings/team'
     | '/sources/database'
     | '/sources/documents'
     | '/subscription/invoices'
@@ -281,6 +353,12 @@ export interface RootRouteChildren {
   SecurityQuestionnaireRoute: typeof SecurityQuestionnaireRoute
   SuppliersRoute: typeof SuppliersRoute
   TrustCenterRoute: typeof TrustCenterRoute
+  SettingsIntegrationsRoute: typeof SettingsIntegrationsRoute
+  SettingsNotificationsRoute: typeof SettingsNotificationsRoute
+  SettingsOrganisationRoute: typeof SettingsOrganisationRoute
+  SettingsProfileRoute: typeof SettingsProfileRoute
+  SettingsSecurityRoute: typeof SettingsSecurityRoute
+  SettingsTeamRoute: typeof SettingsTeamRoute
   SourcesDatabaseRoute: typeof SourcesDatabaseRoute
   SourcesDocumentsRoute: typeof SourcesDocumentsRoute
   SubscriptionInvoicesRoute: typeof SubscriptionInvoicesRoute
@@ -383,6 +461,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrustCenterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/settings/integrations': {
+      id: '/settings/integrations'
+      path: '/settings/integrations'
+      fullPath: '/settings/integrations'
+      preLoaderRoute: typeof SettingsIntegrationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/notifications': {
+      id: '/settings/notifications'
+      path: '/settings/notifications'
+      fullPath: '/settings/notifications'
+      preLoaderRoute: typeof SettingsNotificationsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/organisation': {
+      id: '/settings/organisation'
+      path: '/settings/organisation'
+      fullPath: '/settings/organisation'
+      preLoaderRoute: typeof SettingsOrganisationRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/profile': {
+      id: '/settings/profile'
+      path: '/settings/profile'
+      fullPath: '/settings/profile'
+      preLoaderRoute: typeof SettingsProfileRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/security': {
+      id: '/settings/security'
+      path: '/settings/security'
+      fullPath: '/settings/security'
+      preLoaderRoute: typeof SettingsSecurityRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/settings/team': {
+      id: '/settings/team'
+      path: '/settings/team'
+      fullPath: '/settings/team'
+      preLoaderRoute: typeof SettingsTeamRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/sources/database': {
       id: '/sources/database'
       path: '/sources/database'
@@ -449,6 +569,12 @@ const rootRouteChildren: RootRouteChildren = {
   SecurityQuestionnaireRoute: SecurityQuestionnaireRoute,
   SuppliersRoute: SuppliersRoute,
   TrustCenterRoute: TrustCenterRoute,
+  SettingsIntegrationsRoute: SettingsIntegrationsRoute,
+  SettingsNotificationsRoute: SettingsNotificationsRoute,
+  SettingsOrganisationRoute: SettingsOrganisationRoute,
+  SettingsProfileRoute: SettingsProfileRoute,
+  SettingsSecurityRoute: SettingsSecurityRoute,
+  SettingsTeamRoute: SettingsTeamRoute,
   SourcesDatabaseRoute: SourcesDatabaseRoute,
   SourcesDocumentsRoute: SourcesDocumentsRoute,
   SubscriptionInvoicesRoute: SubscriptionInvoicesRoute,

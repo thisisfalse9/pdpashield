@@ -36,7 +36,7 @@ export function auditRecords(n = 80): AuditRec[] {
   return Array.from({ length: n }, (_, i) => {
     const d = r();
     return {
-      id: "a" + i, at: new Date(base - i * 1000 * 60 * 60 * 9).toISOString(), user: USERS[Math.floor(r() * 4)],
+      id: "a" + i, at: new Date(base - i * 1000 * 60 * 60 * 9).toISOString(), user: USERS[Math.floor(r() * 4)]!!,
       action: acts[Math.floor(r() * acts.length)], table: TABLES[Math.floor(r() * TABLES.length)],
       decision: d < 0.6 ? "Auto-logged" : d < 0.9 ? "Approved" : "Rejected",
       detail: `Ticket #${1000 + i}`,
@@ -61,7 +61,7 @@ export function modelEvents(): ModelEvent[] {
   return Array.from({ length: 30 }, (_, i) => {
     const m = MODELS[Math.floor(r() * MODELS.length)];
     const t = types[Math.floor(r() * types.length)];
-    return { id: "me" + i, at: new Date(Date.parse("2026-10-14T00:00:00Z") - i * 86400000 * 1.7).toISOString(), model: m.name, version: m.version, type: t, user: USERS[Math.floor(r() * 4)], detail: details[t] };
+    return { id: "me" + i, at: new Date(Date.parse("2026-10-14T00:00:00Z") - i * 86400000 * 1.7).toISOString(), model: m.name, version: m.version, type: t, user: USERS[Math.floor(r() * 4)]!!, detail: details[t] };
   });
 }
 
