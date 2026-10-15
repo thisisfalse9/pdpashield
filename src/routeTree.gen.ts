@@ -16,6 +16,7 @@ import { Route as AiRiskAssessmentRouteImport } from './routes/ai-risk-assessmen
 import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DataAuditingRouteImport } from './routes/data-auditing'
 import { Route as DatabaseMonitoringRouteImport } from './routes/database-monitoring'
+import { Route as DocumentScanRouteImport } from './routes/document-scan'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as ModelMonitoringRouteImport } from './routes/model-monitoring'
 import { Route as PdpaScoreRouteImport } from './routes/pdpa-score'
@@ -70,6 +71,11 @@ const DataAuditingRoute = DataAuditingRouteImport.update({
 const DatabaseMonitoringRoute = DatabaseMonitoringRouteImport.update({
   id: '/database-monitoring',
   path: '/database-monitoring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentScanRoute = DocumentScanRouteImport.update({
+  id: '/document-scan',
+  path: '/document-scan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsRoute = DocumentsRouteImport.update({
@@ -181,6 +187,7 @@ export interface FileRoutesByFullPath {
   '/auth': typeof AuthRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
+  '/document-scan': typeof DocumentScanRoute
   '/documents': typeof DocumentsRoute
   '/model-monitoring': typeof ModelMonitoringRoute
   '/pdpa-score': typeof PdpaScoreRoute
@@ -210,6 +217,7 @@ export interface FileRoutesByTo {
   '/auth': typeof AuthRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
+  '/document-scan': typeof DocumentScanRoute
   '/documents': typeof DocumentsRoute
   '/model-monitoring': typeof ModelMonitoringRoute
   '/pdpa-score': typeof PdpaScoreRoute
@@ -240,6 +248,7 @@ export interface FileRoutesById {
   '/auth': typeof AuthRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
+  '/document-scan': typeof DocumentScanRoute
   '/documents': typeof DocumentsRoute
   '/model-monitoring': typeof ModelMonitoringRoute
   '/pdpa-score': typeof PdpaScoreRoute
@@ -271,6 +280,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/data-auditing'
     | '/database-monitoring'
+    | '/document-scan'
     | '/documents'
     | '/model-monitoring'
     | '/pdpa-score'
@@ -300,6 +310,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/data-auditing'
     | '/database-monitoring'
+    | '/document-scan'
     | '/documents'
     | '/model-monitoring'
     | '/pdpa-score'
@@ -329,6 +340,7 @@ export interface FileRouteTypes {
     | '/auth'
     | '/data-auditing'
     | '/database-monitoring'
+    | '/document-scan'
     | '/documents'
     | '/model-monitoring'
     | '/pdpa-score'
@@ -359,6 +371,7 @@ export interface RootRouteChildren {
   AuthRoute: typeof AuthRoute
   DataAuditingRoute: typeof DataAuditingRoute
   DatabaseMonitoringRoute: typeof DatabaseMonitoringRoute
+  DocumentScanRoute: typeof DocumentScanRoute
   DocumentsRoute: typeof DocumentsRoute
   ModelMonitoringRoute: typeof ModelMonitoringRoute
   PdpaScoreRoute: typeof PdpaScoreRoute
@@ -430,6 +443,13 @@ declare module '@tanstack/react-router' {
       path: '/database-monitoring'
       fullPath: '/database-monitoring'
       preLoaderRoute: typeof DatabaseMonitoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/document-scan': {
+      id: '/document-scan'
+      path: '/document-scan'
+      fullPath: '/document-scan'
+      preLoaderRoute: typeof DocumentScanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents': {
@@ -583,6 +603,7 @@ const rootRouteChildren: RootRouteChildren = {
   AuthRoute: AuthRoute,
   DataAuditingRoute: DataAuditingRoute,
   DatabaseMonitoringRoute: DatabaseMonitoringRoute,
+  DocumentScanRoute: DocumentScanRoute,
   DocumentsRoute: DocumentsRoute,
   ModelMonitoringRoute: ModelMonitoringRoute,
   PdpaScoreRoute: PdpaScoreRoute,

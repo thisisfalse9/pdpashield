@@ -17,6 +17,7 @@ export const NAV: NavGroup[] = [
   ] },
   { label: "Compliance", items: [
     { title: "AI Readiness Check", url: "/ai-readiness", icon: ScanSearch },
+    { title: "Document Scan", url: "/document-scan", icon: FileText },
     { title: "Database Monitoring", url: "/database-monitoring", icon: Activity },
     { title: "Data Auditing", url: "/data-auditing", icon: ClipboardList },
   ] },
