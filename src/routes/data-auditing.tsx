@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Download, Loader2, RefreshCw, Search } from "lucide-react";
+import { Activity, AlertTriangle, CheckCircle2, Download, FileText, Loader2, RefreshCw, Search, XCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Page, DemoBadge, Notice, Status, Empty, downloadFile, toCsv } from "@/components/app/kit";
+import { Page, DemoBadge, Notice, Stat, Status, Empty, downloadFile, toCsv } from "@/components/app/kit";
 import { auditRecords } from "@/lib/demo-events";
 import { monitorAuditEvents } from "@/lib/dbmon.functions";
 import { useCan } from "@/lib/store";
