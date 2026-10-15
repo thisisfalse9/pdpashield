@@ -10,33 +10,284 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AiAuditTrailRouteImport } from './routes/ai-audit-trail'
+import { Route as AiReadinessRouteImport } from './routes/ai-readiness'
+import { Route as AiRiskAssessmentRouteImport } from './routes/ai-risk-assessment'
+import { Route as DataAuditingRouteImport } from './routes/data-auditing'
+import { Route as DatabaseMonitoringRouteImport } from './routes/database-monitoring'
+import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as ModelMonitoringRouteImport } from './routes/model-monitoring'
+import { Route as PdpaScoreRouteImport } from './routes/pdpa-score'
+import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as SecurityQuestionnaireRouteImport } from './routes/security-questionnaire'
+import { Route as SuppliersRouteImport } from './routes/suppliers'
+import { Route as TrustCenterRouteImport } from './routes/trust-center'
+import { Route as SourcesDatabaseRouteImport } from './routes/sources.database'
+import { Route as SourcesDocumentsRouteImport } from './routes/sources.documents'
+import { Route as SubscriptionIndexRouteImport } from './routes/subscription.index'
+import { Route as SubscriptionInvoicesRouteImport } from './routes/subscription.invoices'
+import { Route as SubscriptionPlansRouteImport } from './routes/subscription.plans'
+import { Route as SubscriptionSeatsRouteImport } from './routes/subscription.seats'
+import { Route as SubscriptionUsageRouteImport } from './routes/subscription.usage'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiAuditTrailRoute = AiAuditTrailRouteImport.update({
+  id: '/ai-audit-trail',
+  path: '/ai-audit-trail',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiReadinessRoute = AiReadinessRouteImport.update({
+  id: '/ai-readiness',
+  path: '/ai-readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiRiskAssessmentRoute = AiRiskAssessmentRouteImport.update({
+  id: '/ai-risk-assessment',
+  path: '/ai-risk-assessment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataAuditingRoute = DataAuditingRouteImport.update({
+  id: '/data-auditing',
+  path: '/data-auditing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatabaseMonitoringRoute = DatabaseMonitoringRouteImport.update({
+  id: '/database-monitoring',
+  path: '/database-monitoring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DocumentsRoute = DocumentsRouteImport.update({
+  id: '/documents',
+  path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelMonitoringRoute = ModelMonitoringRouteImport.update({
+  id: '/model-monitoring',
+  path: '/model-monitoring',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PdpaScoreRoute = PdpaScoreRouteImport.update({
+  id: '/pdpa-score',
+  path: '/pdpa-score',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PoliciesRoute = PoliciesRouteImport.update({
+  id: '/policies',
+  path: '/policies',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SecurityQuestionnaireRoute = SecurityQuestionnaireRouteImport.update({
+  id: '/security-questionnaire',
+  path: '/security-questionnaire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuppliersRoute = SuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrustCenterRoute = TrustCenterRouteImport.update({
+  id: '/trust-center',
+  path: '/trust-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SourcesDatabaseRoute = SourcesDatabaseRouteImport.update({
+  id: '/sources/database',
+  path: '/sources/database',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SourcesDocumentsRoute = SourcesDocumentsRouteImport.update({
+  id: '/sources/documents',
+  path: '/sources/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionIndexRoute = SubscriptionIndexRouteImport.update({
+  id: '/subscription/',
+  path: '/subscription/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionInvoicesRoute = SubscriptionInvoicesRouteImport.update({
+  id: '/subscription/invoices',
+  path: '/subscription/invoices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionPlansRoute = SubscriptionPlansRouteImport.update({
+  id: '/subscription/plans',
+  path: '/subscription/plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionSeatsRoute = SubscriptionSeatsRouteImport.update({
+  id: '/subscription/seats',
+  path: '/subscription/seats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionUsageRoute = SubscriptionUsageRouteImport.update({
+  id: '/subscription/usage',
+  path: '/subscription/usage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-audit-trail': typeof AiAuditTrailRoute
+  '/ai-readiness': typeof AiReadinessRoute
+  '/ai-risk-assessment': typeof AiRiskAssessmentRoute
+  '/data-auditing': typeof DataAuditingRoute
+  '/database-monitoring': typeof DatabaseMonitoringRoute
+  '/documents': typeof DocumentsRoute
+  '/model-monitoring': typeof ModelMonitoringRoute
+  '/pdpa-score': typeof PdpaScoreRoute
+  '/policies': typeof PoliciesRoute
+  '/security-questionnaire': typeof SecurityQuestionnaireRoute
+  '/suppliers': typeof SuppliersRoute
+  '/trust-center': typeof TrustCenterRoute
+  '/sources/database': typeof SourcesDatabaseRoute
+  '/sources/documents': typeof SourcesDocumentsRoute
+  '/subscription/invoices': typeof SubscriptionInvoicesRoute
+  '/subscription/plans': typeof SubscriptionPlansRoute
+  '/subscription/seats': typeof SubscriptionSeatsRoute
+  '/subscription/usage': typeof SubscriptionUsageRoute
+  '/subscription/': typeof SubscriptionIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-audit-trail': typeof AiAuditTrailRoute
+  '/ai-readiness': typeof AiReadinessRoute
+  '/ai-risk-assessment': typeof AiRiskAssessmentRoute
+  '/data-auditing': typeof DataAuditingRoute
+  '/database-monitoring': typeof DatabaseMonitoringRoute
+  '/documents': typeof DocumentsRoute
+  '/model-monitoring': typeof ModelMonitoringRoute
+  '/pdpa-score': typeof PdpaScoreRoute
+  '/policies': typeof PoliciesRoute
+  '/security-questionnaire': typeof SecurityQuestionnaireRoute
+  '/suppliers': typeof SuppliersRoute
+  '/trust-center': typeof TrustCenterRoute
+  '/sources/database': typeof SourcesDatabaseRoute
+  '/sources/documents': typeof SourcesDocumentsRoute
+  '/subscription/invoices': typeof SubscriptionInvoicesRoute
+  '/subscription/plans': typeof SubscriptionPlansRoute
+  '/subscription/seats': typeof SubscriptionSeatsRoute
+  '/subscription/usage': typeof SubscriptionUsageRoute
+  '/subscription': typeof SubscriptionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai-audit-trail': typeof AiAuditTrailRoute
+  '/ai-readiness': typeof AiReadinessRoute
+  '/ai-risk-assessment': typeof AiRiskAssessmentRoute
+  '/data-auditing': typeof DataAuditingRoute
+  '/database-monitoring': typeof DatabaseMonitoringRoute
+  '/documents': typeof DocumentsRoute
+  '/model-monitoring': typeof ModelMonitoringRoute
+  '/pdpa-score': typeof PdpaScoreRoute
+  '/policies': typeof PoliciesRoute
+  '/security-questionnaire': typeof SecurityQuestionnaireRoute
+  '/suppliers': typeof SuppliersRoute
+  '/trust-center': typeof TrustCenterRoute
+  '/sources/database': typeof SourcesDatabaseRoute
+  '/sources/documents': typeof SourcesDocumentsRoute
+  '/subscription/invoices': typeof SubscriptionInvoicesRoute
+  '/subscription/plans': typeof SubscriptionPlansRoute
+  '/subscription/seats': typeof SubscriptionSeatsRoute
+  '/subscription/usage': typeof SubscriptionUsageRoute
+  '/subscription/': typeof SubscriptionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/ai-audit-trail'
+    | '/ai-readiness'
+    | '/ai-risk-assessment'
+    | '/data-auditing'
+    | '/database-monitoring'
+    | '/documents'
+    | '/model-monitoring'
+    | '/pdpa-score'
+    | '/policies'
+    | '/security-questionnaire'
+    | '/suppliers'
+    | '/trust-center'
+    | '/sources/database'
+    | '/sources/documents'
+    | '/subscription/invoices'
+    | '/subscription/plans'
+    | '/subscription/seats'
+    | '/subscription/usage'
+    | '/subscription/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/ai-audit-trail'
+    | '/ai-readiness'
+    | '/ai-risk-assessment'
+    | '/data-auditing'
+    | '/database-monitoring'
+    | '/documents'
+    | '/model-monitoring'
+    | '/pdpa-score'
+    | '/policies'
+    | '/security-questionnaire'
+    | '/suppliers'
+    | '/trust-center'
+    | '/sources/database'
+    | '/sources/documents'
+    | '/subscription/invoices'
+    | '/subscription/plans'
+    | '/subscription/seats'
+    | '/subscription/usage'
+    | '/subscription'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai-audit-trail'
+    | '/ai-readiness'
+    | '/ai-risk-assessment'
+    | '/data-auditing'
+    | '/database-monitoring'
+    | '/documents'
+    | '/model-monitoring'
+    | '/pdpa-score'
+    | '/policies'
+    | '/security-questionnaire'
+    | '/suppliers'
+    | '/trust-center'
+    | '/sources/database'
+    | '/sources/documents'
+    | '/subscription/invoices'
+    | '/subscription/plans'
+    | '/subscription/seats'
+    | '/subscription/usage'
+    | '/subscription/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiAuditTrailRoute: typeof AiAuditTrailRoute
+  AiReadinessRoute: typeof AiReadinessRoute
+  AiRiskAssessmentRoute: typeof AiRiskAssessmentRoute
+  DataAuditingRoute: typeof DataAuditingRoute
+  DatabaseMonitoringRoute: typeof DatabaseMonitoringRoute
+  DocumentsRoute: typeof DocumentsRoute
+  ModelMonitoringRoute: typeof ModelMonitoringRoute
+  PdpaScoreRoute: typeof PdpaScoreRoute
+  PoliciesRoute: typeof PoliciesRoute
+  SecurityQuestionnaireRoute: typeof SecurityQuestionnaireRoute
+  SuppliersRoute: typeof SuppliersRoute
+  TrustCenterRoute: typeof TrustCenterRoute
+  SourcesDatabaseRoute: typeof SourcesDatabaseRoute
+  SourcesDocumentsRoute: typeof SourcesDocumentsRoute
+  SubscriptionInvoicesRoute: typeof SubscriptionInvoicesRoute
+  SubscriptionPlansRoute: typeof SubscriptionPlansRoute
+  SubscriptionSeatsRoute: typeof SubscriptionSeatsRoute
+  SubscriptionUsageRoute: typeof SubscriptionUsageRoute
+  SubscriptionIndexRoute: typeof SubscriptionIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +299,163 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-audit-trail': {
+      id: '/ai-audit-trail'
+      path: '/ai-audit-trail'
+      fullPath: '/ai-audit-trail'
+      preLoaderRoute: typeof AiAuditTrailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-readiness': {
+      id: '/ai-readiness'
+      path: '/ai-readiness'
+      fullPath: '/ai-readiness'
+      preLoaderRoute: typeof AiReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-risk-assessment': {
+      id: '/ai-risk-assessment'
+      path: '/ai-risk-assessment'
+      fullPath: '/ai-risk-assessment'
+      preLoaderRoute: typeof AiRiskAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-auditing': {
+      id: '/data-auditing'
+      path: '/data-auditing'
+      fullPath: '/data-auditing'
+      preLoaderRoute: typeof DataAuditingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/database-monitoring': {
+      id: '/database-monitoring'
+      path: '/database-monitoring'
+      fullPath: '/database-monitoring'
+      preLoaderRoute: typeof DatabaseMonitoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/documents': {
+      id: '/documents'
+      path: '/documents'
+      fullPath: '/documents'
+      preLoaderRoute: typeof DocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/model-monitoring': {
+      id: '/model-monitoring'
+      path: '/model-monitoring'
+      fullPath: '/model-monitoring'
+      preLoaderRoute: typeof ModelMonitoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/pdpa-score': {
+      id: '/pdpa-score'
+      path: '/pdpa-score'
+      fullPath: '/pdpa-score'
+      preLoaderRoute: typeof PdpaScoreRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/policies': {
+      id: '/policies'
+      path: '/policies'
+      fullPath: '/policies'
+      preLoaderRoute: typeof PoliciesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/security-questionnaire': {
+      id: '/security-questionnaire'
+      path: '/security-questionnaire'
+      fullPath: '/security-questionnaire'
+      preLoaderRoute: typeof SecurityQuestionnaireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/suppliers': {
+      id: '/suppliers'
+      path: '/suppliers'
+      fullPath: '/suppliers'
+      preLoaderRoute: typeof SuppliersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trust-center': {
+      id: '/trust-center'
+      path: '/trust-center'
+      fullPath: '/trust-center'
+      preLoaderRoute: typeof TrustCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sources/database': {
+      id: '/sources/database'
+      path: '/sources/database'
+      fullPath: '/sources/database'
+      preLoaderRoute: typeof SourcesDatabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sources/documents': {
+      id: '/sources/documents'
+      path: '/sources/documents'
+      fullPath: '/sources/documents'
+      preLoaderRoute: typeof SourcesDocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/': {
+      id: '/subscription/'
+      path: '/subscription'
+      fullPath: '/subscription/'
+      preLoaderRoute: typeof SubscriptionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/invoices': {
+      id: '/subscription/invoices'
+      path: '/subscription/invoices'
+      fullPath: '/subscription/invoices'
+      preLoaderRoute: typeof SubscriptionInvoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/plans': {
+      id: '/subscription/plans'
+      path: '/subscription/plans'
+      fullPath: '/subscription/plans'
+      preLoaderRoute: typeof SubscriptionPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/seats': {
+      id: '/subscription/seats'
+      path: '/subscription/seats'
+      fullPath: '/subscription/seats'
+      preLoaderRoute: typeof SubscriptionSeatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/usage': {
+      id: '/subscription/usage'
+      path: '/subscription/usage'
+      fullPath: '/subscription/usage'
+      preLoaderRoute: typeof SubscriptionUsageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiAuditTrailRoute: AiAuditTrailRoute,
+  AiReadinessRoute: AiReadinessRoute,
+  AiRiskAssessmentRoute: AiRiskAssessmentRoute,
+  DataAuditingRoute: DataAuditingRoute,
+  DatabaseMonitoringRoute: DatabaseMonitoringRoute,
+  DocumentsRoute: DocumentsRoute,
+  ModelMonitoringRoute: ModelMonitoringRoute,
+  PdpaScoreRoute: PdpaScoreRoute,
+  PoliciesRoute: PoliciesRoute,
+  SecurityQuestionnaireRoute: SecurityQuestionnaireRoute,
+  SuppliersRoute: SuppliersRoute,
+  TrustCenterRoute: TrustCenterRoute,
+  SourcesDatabaseRoute: SourcesDatabaseRoute,
+  SourcesDocumentsRoute: SourcesDocumentsRoute,
+  SubscriptionInvoicesRoute: SubscriptionInvoicesRoute,
+  SubscriptionPlansRoute: SubscriptionPlansRoute,
+  SubscriptionSeatsRoute: SubscriptionSeatsRoute,
+  SubscriptionUsageRoute: SubscriptionUsageRoute,
+  SubscriptionIndexRoute: SubscriptionIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
