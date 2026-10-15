@@ -113,14 +113,22 @@ function DbSource() {
               Download setup script
             </a>
           </Button>
-          <Button variant="outline" size="sm" disabled={!session || busy !== ""} onClick={() => void load()}>
-            <RefreshCw className="mr-2 h-4 w-4" />
-            Reload
-          </Button>
-          <Button size="sm" disabled={!session || busy !== ""} onClick={() => void runScan()}>
-            {busy === "scan" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <PlugZap className="mr-2 h-4 w-4" />}
-            Run scan
-          </Button>
+          {ready && !session ? (
+            <Button asChild size="sm">
+              <a href="/auth">Sign in to Reload / Run scan</a>
+            </Button>
+          ) : (
+            <>
+              <Button variant="outline" size="sm" disabled={busy !== ""} onClick={() => void load()}>
+                <RefreshCw className="mr-2 h-4 w-4" />
+                Reload
+              </Button>
+              <Button size="sm" disabled={busy !== ""} onClick={() => void runScan()}>
+                {busy === "scan" ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <PlugZap className="mr-2 h-4 w-4" />}
+                Run scan
+              </Button>
+            </>
+          )}
         </>
       }
     >
