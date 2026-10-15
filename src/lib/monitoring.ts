@@ -161,14 +161,14 @@ export function schemaFindings(columns: TableColumn[], rows: Row[]): Finding[] {
 
 const SEV_RANK: Record<Severity, number> = { High: 3, Medium: 2, Low: 1 };
 
-/** Merge two finding lists, summing counts for the same column and label. */
+/** Merge finding lists that looked at the same rows, keeping the clearer label. */
 export function combineFindings(a: Finding[], b: Finding[]): Finding[] {
   const map = new Map<string, Finding>();
   for (const f of [...a, ...b]) {
-    const key = `${f.column}|${f.label ?? f.type}`;
+    const key = `${f.column}|${f.type}`;
     const cur = map.get(key);
-    if (cur) cur.count += f.count;
-    else map.set(key, { ...f });
+    if (!cur) map.set(key, { ...f });
+    else map.set(key, { ...cur, label: cur.label ?? f.label, count: Math.max(cur.count, f.count) });
   }
   return [...map.values()].sort(
     (x, y) => SEV_RANK[y.severity] - SEV_RANK[x.severity] || y.count - x.count,
