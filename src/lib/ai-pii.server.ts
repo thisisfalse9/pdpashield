@@ -70,6 +70,7 @@ export async function runAiPiiReview(input: { columns: { name: string; samples: 
     }),
   });
 
+  console.log("[ai-pii] upstream", res.status);
   if (!res.ok || !res.body) {
     const body = await res.text().catch(() => "");
     let message = "";
@@ -87,7 +88,7 @@ export async function runAiPiiReview(input: { columns: { name: string; samples: 
   let failure = "";
   for (;;) {
     const { done, value } = await reader.read();
-    if (done) break;
+    if (done) { console.log("[ai-pii] stream done", text.length); break; }
     buf += decoder.decode(value, { stream: true });
     let idx: number;
     while ((idx = buf.indexOf("\n\n")) !== -1) {
