@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AiReadinessRouteImport } from './routes/ai-readiness'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as PdpaScoreRouteImport } from './routes/pdpa-score'
 import { Route as PoliciesRouteImport } from './routes/policies'
@@ -17,6 +18,11 @@ import { Route as PoliciesRouteImport } from './routes/policies'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiReadinessRoute = AiReadinessRouteImport.update({
+  id: '/ai-readiness',
+  path: '/ai-readiness',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsRoute = DocumentsRouteImport.update({
@@ -37,12 +43,14 @@ const PoliciesRoute = PoliciesRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-readiness': typeof AiReadinessRoute
   '/documents': typeof DocumentsRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-readiness': typeof AiReadinessRoute
   '/documents': typeof DocumentsRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
@@ -50,20 +58,28 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai-readiness': typeof AiReadinessRoute
   '/documents': typeof DocumentsRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/documents' | '/pdpa-score' | '/policies'
+  fullPaths: '/' | '/ai-readiness' | '/documents' | '/pdpa-score' | '/policies'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/documents' | '/pdpa-score' | '/policies'
-  id: '__root__' | '/' | '/documents' | '/pdpa-score' | '/policies'
+  to: '/' | '/ai-readiness' | '/documents' | '/pdpa-score' | '/policies'
+  id:
+    | '__root__'
+    | '/'
+    | '/ai-readiness'
+    | '/documents'
+    | '/pdpa-score'
+    | '/policies'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiReadinessRoute: typeof AiReadinessRoute
   DocumentsRoute: typeof DocumentsRoute
   PdpaScoreRoute: typeof PdpaScoreRoute
   PoliciesRoute: typeof PoliciesRoute
@@ -76,6 +92,13 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-readiness': {
+      id: '/ai-readiness'
+      path: '/ai-readiness'
+      fullPath: '/ai-readiness'
+      preLoaderRoute: typeof AiReadinessRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents': {
@@ -104,6 +127,7 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiReadinessRoute: AiReadinessRoute,
   DocumentsRoute: DocumentsRoute,
   PdpaScoreRoute: PdpaScoreRoute,
   PoliciesRoute: PoliciesRoute,
