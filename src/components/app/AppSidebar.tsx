@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/alert-dialog";
 import { toast } from "sonner";
 import { NAV } from "./nav";
-import logo from "@/assets/logo.png.asset.json";
+import logo from "@/assets/logo.png";
 
 export function AppSidebar() {
   const { state } = useSidebar();
@@ -24,7 +24,7 @@ export function AppSidebar() {
     <Sidebar collapsible="icon">
       <SidebarHeader>
         <Link to="/" className="flex items-center gap-2 px-1 py-2">
-          <img src={logo.url} alt="PDPA Shield" className="h-9 w-9 shrink-0 rounded-md bg-sidebar-foreground/95 p-0.5" />
+          <img src={logo} alt="PDPA Shield" className="h-9 w-9 shrink-0 rounded-md bg-sidebar-foreground/95 p-0.5" />
           {!collapsed && (
             <div className="min-w-0">
               <div className="truncate font-display text-sm font-semibold text-sidebar-accent-foreground">PDPA Shield</div>
