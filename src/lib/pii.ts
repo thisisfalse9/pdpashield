@@ -1,7 +1,7 @@
 // Heuristic PII detection for tabular data. Pattern-based: it WILL miss some
 // values and flag some false positives. Never present as perfectly accurate.
 
-export type PiiType = "name" | "email" | "phone" | "nric";
+export type PiiType = "name" | "email" | "phone" | "nric" | "other";
 export type Severity = "High" | "Medium" | "Low";
 export type MaskMode = "redact" | "partial" | "hash" | "keep";
 
@@ -10,6 +10,7 @@ export const PII_LABEL: Record<PiiType, string> = {
   email: "Email address",
   phone: "Phone number",
   nric: "NRIC / FIN-like ID",
+  other: "Other personal data",
 };
 
 export const PII_SEVERITY: Record<PiiType, Severity> = {
@@ -17,6 +18,7 @@ export const PII_SEVERITY: Record<PiiType, Severity> = {
   phone: "Medium",
   email: "Medium",
   name: "Low",
+  other: "Medium",
 };
 
 export const PII_ACTION: Record<PiiType, string> = {
@@ -24,6 +26,7 @@ export const PII_ACTION: Record<PiiType, string> = {
   phone: "Partially mask before analytics or AI use.",
   email: "Partially mask or pseudonymise.",
   name: "Pseudonymise or drop if not needed for the purpose.",
+  other: "Review and mask before AI use.",
 };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -43,6 +46,8 @@ export function classifyValue(v: string): PiiType | null {
 export interface Finding {
   column: string;
   type: PiiType;
+  label?: string;
+  source?: "pattern" | "ai";
   count: number;
   severity: Severity;
   action: string;
@@ -85,6 +90,7 @@ export function maskValue(v: string, type: PiiType, mode: MaskMode): string {
     return (u?.[0] ?? "") + "***@" + (d ?? "");
   }
   if (type === "nric") return "*****" + v.slice(-4);
+  if (type === "other") return v.length <= 2 ? "**" : v[0] + "*".repeat(Math.min(8, v.length - 1));
   if (type === "phone") return v.replace(/\d(?=(?:\D*\d){4})/g, "*");
   return v
     .split(/\s+/)
@@ -98,7 +104,7 @@ export function maskRows(rows: Row[], findings: Finding[], modes: Record<string,
   const rank = { High: 3, Medium: 2, Low: 1 };
   for (const f of findings) {
     const cur = byCol.get(f.column);
-    if (!cur || rank[PII_SEVERITY[f.type]] > rank[PII_SEVERITY[cur]]) byCol.set(f.column, f.type);
+    if (!cur || rank[f.severity] > rank[PII_SEVERITY[cur]]) byCol.set(f.column, f.type);
   }
   return rows.map((r) => {
     const out: Row = { ...r };
