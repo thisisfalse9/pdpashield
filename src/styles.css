@@ -141,7 +141,3 @@
 
 @utility shadow-brutal { box-shadow: 4px 4px 0 0 var(--foreground); }
 @utility shadow-brutal-sm { box-shadow: 2px 2px 0 0 var(--foreground); }
-@layer base {
-  [data-slot="card"] { border-width: 2px; border-color: var(--foreground); box-shadow: 4px 4px 0 0 var(--foreground); }
-  [data-slot="button"] { border: 2px solid var(--foreground); font-weight: 700; }
-}
