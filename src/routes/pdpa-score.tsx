@@ -32,6 +32,7 @@ function Score() {
     <Page title="PDPA Score" description="Internal readiness estimate across the PDPA's main obligations."
       actions={<Button disabled={!canEdit || answered < s.controls.length} onClick={() => { setState((x) => ({ assessments: [...x.assessments, { id: uid(), at: today(), score, by: x.profile.name }] })); toast.success(`Assessment saved: ${score}`); }}><Save className="mr-2 h-4 w-4" />Save assessment</Button>}>
       <Notice>This is an internal readiness estimate calculated from your answers and configured control weights. It is not an official PDPC assessment, audit or certification.</Notice>
+      <CombinedCard manual={score} />
       <div className="grid gap-4 md:grid-cols-[260px_1fr]">
         <Card className="shadow-card"><CardContent className="flex flex-col items-center gap-3 p-6">
           <ScoreRing value={score} size={150} label="Readiness" />
