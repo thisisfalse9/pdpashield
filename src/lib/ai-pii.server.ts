@@ -39,6 +39,7 @@ export async function runAiPiiReview(input: { columns: { name: string; samples: 
   const result = streamText({
     model: provider.responses("openai/gpt-6-astra"),
     maxRetries: 0,
+    onError: ({ error }) => console.error("[ai-pii] stream", error instanceof Error ? error.message : JSON.stringify(error).slice(0, 500)),
     output: Output.object({ schema }),
     messages: [
       {
