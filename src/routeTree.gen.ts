@@ -11,9 +11,14 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AiReadinessRouteImport } from './routes/ai-readiness'
+import { Route as DataAuditingRouteImport } from './routes/data-auditing'
+import { Route as DatabaseMonitoringRouteImport } from './routes/database-monitoring'
 import { Route as DocumentsRouteImport } from './routes/documents'
 import { Route as PdpaScoreRouteImport } from './routes/pdpa-score'
 import { Route as PoliciesRouteImport } from './routes/policies'
+import { Route as SecurityQuestionnaireRouteImport } from './routes/security-questionnaire'
+import { Route as SuppliersRouteImport } from './routes/suppliers'
+import { Route as TrustCenterRouteImport } from './routes/trust-center'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -23,6 +28,16 @@ const IndexRoute = IndexRouteImport.update({
 const AiReadinessRoute = AiReadinessRouteImport.update({
   id: '/ai-readiness',
   path: '/ai-readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DataAuditingRoute = DataAuditingRouteImport.update({
+  id: '/data-auditing',
+  path: '/data-auditing',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const DatabaseMonitoringRoute = DatabaseMonitoringRouteImport.update({
+  id: '/database-monitoring',
+  path: '/database-monitoring',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DocumentsRoute = DocumentsRouteImport.update({
@@ -40,49 +55,109 @@ const PoliciesRoute = PoliciesRouteImport.update({
   path: '/policies',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SecurityQuestionnaireRoute = SecurityQuestionnaireRouteImport.update({
+  id: '/security-questionnaire',
+  path: '/security-questionnaire',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SuppliersRoute = SuppliersRouteImport.update({
+  id: '/suppliers',
+  path: '/suppliers',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const TrustCenterRoute = TrustCenterRouteImport.update({
+  id: '/trust-center',
+  path: '/trust-center',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/ai-readiness': typeof AiReadinessRoute
+  '/data-auditing': typeof DataAuditingRoute
+  '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
+  '/security-questionnaire': typeof SecurityQuestionnaireRoute
+  '/suppliers': typeof SuppliersRoute
+  '/trust-center': typeof TrustCenterRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/ai-readiness': typeof AiReadinessRoute
+  '/data-auditing': typeof DataAuditingRoute
+  '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
+  '/security-questionnaire': typeof SecurityQuestionnaireRoute
+  '/suppliers': typeof SuppliersRoute
+  '/trust-center': typeof TrustCenterRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/ai-readiness': typeof AiReadinessRoute
+  '/data-auditing': typeof DataAuditingRoute
+  '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
+  '/security-questionnaire': typeof SecurityQuestionnaireRoute
+  '/suppliers': typeof SuppliersRoute
+  '/trust-center': typeof TrustCenterRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/ai-readiness' | '/documents' | '/pdpa-score' | '/policies'
+  fullPaths:
+    | '/'
+    | '/ai-readiness'
+    | '/data-auditing'
+    | '/database-monitoring'
+    | '/documents'
+    | '/pdpa-score'
+    | '/policies'
+    | '/security-questionnaire'
+    | '/suppliers'
+    | '/trust-center'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/ai-readiness' | '/documents' | '/pdpa-score' | '/policies'
+  to:
+    | '/'
+    | '/ai-readiness'
+    | '/data-auditing'
+    | '/database-monitoring'
+    | '/documents'
+    | '/pdpa-score'
+    | '/policies'
+    | '/security-questionnaire'
+    | '/suppliers'
+    | '/trust-center'
   id:
     | '__root__'
     | '/'
     | '/ai-readiness'
+    | '/data-auditing'
+    | '/database-monitoring'
     | '/documents'
     | '/pdpa-score'
     | '/policies'
+    | '/security-questionnaire'
+    | '/suppliers'
+    | '/trust-center'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AiReadinessRoute: typeof AiReadinessRoute
+  DataAuditingRoute: typeof DataAuditingRoute
+  DatabaseMonitoringRoute: typeof DatabaseMonitoringRoute
   DocumentsRoute: typeof DocumentsRoute
   PdpaScoreRoute: typeof PdpaScoreRoute
   PoliciesRoute: typeof PoliciesRoute
+  SecurityQuestionnaireRoute: typeof SecurityQuestionnaireRoute
+  SuppliersRoute: typeof SuppliersRoute
+  TrustCenterRoute: typeof TrustCenterRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -99,6 +174,20 @@ declare module '@tanstack/react-router' {
       path: '/ai-readiness'
       fullPath: '/ai-readiness'
       preLoaderRoute: typeof AiReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/data-auditing': {
+      id: '/data-auditing'
+      path: '/data-auditing'
+      fullPath: '/data-auditing'
+      preLoaderRoute: typeof DataAuditingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/database-monitoring': {
+      id: '/database-monitoring'
+      path: '/database-monitoring'
+      fullPath: '/database-monitoring'
+      preLoaderRoute: typeof DatabaseMonitoringRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/documents': {
@@ -122,15 +211,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PoliciesRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/security-questionnaire': {
+      id: '/security-questionnaire'
+      path: '/security-questionnaire'
+      fullPath: '/security-questionnaire'
+      preLoaderRoute: typeof SecurityQuestionnaireRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/suppliers': {
+      id: '/suppliers'
+      path: '/suppliers'
+      fullPath: '/suppliers'
+      preLoaderRoute: typeof SuppliersRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/trust-center': {
+      id: '/trust-center'
+      path: '/trust-center'
+      fullPath: '/trust-center'
+      preLoaderRoute: typeof TrustCenterRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AiReadinessRoute: AiReadinessRoute,
+  DataAuditingRoute: DataAuditingRoute,
+  DatabaseMonitoringRoute: DatabaseMonitoringRoute,
   DocumentsRoute: DocumentsRoute,
   PdpaScoreRoute: PdpaScoreRoute,
   PoliciesRoute: PoliciesRoute,
+  SecurityQuestionnaireRoute: SecurityQuestionnaireRoute,
+  SuppliersRoute: SuppliersRoute,
+  TrustCenterRoute: TrustCenterRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
