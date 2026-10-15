@@ -10,7 +10,9 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AiAuditTrailRouteImport } from './routes/ai-audit-trail'
 import { Route as AiReadinessRouteImport } from './routes/ai-readiness'
+import { Route as AiRiskAssessmentRouteImport } from './routes/ai-risk-assessment'
 import { Route as DataAuditingRouteImport } from './routes/data-auditing'
 import { Route as DatabaseMonitoringRouteImport } from './routes/database-monitoring'
 import { Route as DocumentsRouteImport } from './routes/documents'
@@ -19,15 +21,27 @@ import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as SecurityQuestionnaireRouteImport } from './routes/security-questionnaire'
 import { Route as SuppliersRouteImport } from './routes/suppliers'
 import { Route as TrustCenterRouteImport } from './routes/trust-center'
+import { Route as SourcesDatabaseRouteImport } from './routes/sources.database'
+import { Route as SourcesDocumentsRouteImport } from './routes/sources.documents'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AiAuditTrailRoute = AiAuditTrailRouteImport.update({
+  id: '/ai-audit-trail',
+  path: '/ai-audit-trail',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AiReadinessRoute = AiReadinessRouteImport.update({
   id: '/ai-readiness',
   path: '/ai-readiness',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AiRiskAssessmentRoute = AiRiskAssessmentRouteImport.update({
+  id: '/ai-risk-assessment',
+  path: '/ai-risk-assessment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DataAuditingRoute = DataAuditingRouteImport.update({
@@ -70,10 +84,22 @@ const TrustCenterRoute = TrustCenterRouteImport.update({
   path: '/trust-center',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SourcesDatabaseRoute = SourcesDatabaseRouteImport.update({
+  id: '/sources/database',
+  path: '/sources/database',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SourcesDocumentsRoute = SourcesDocumentsRouteImport.update({
+  id: '/sources/documents',
+  path: '/sources/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/ai-audit-trail': typeof AiAuditTrailRoute
   '/ai-readiness': typeof AiReadinessRoute
+  '/ai-risk-assessment': typeof AiRiskAssessmentRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
@@ -82,10 +108,14 @@ export interface FileRoutesByFullPath {
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
   '/suppliers': typeof SuppliersRoute
   '/trust-center': typeof TrustCenterRoute
+  '/sources/database': typeof SourcesDatabaseRoute
+  '/sources/documents': typeof SourcesDocumentsRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/ai-audit-trail': typeof AiAuditTrailRoute
   '/ai-readiness': typeof AiReadinessRoute
+  '/ai-risk-assessment': typeof AiRiskAssessmentRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
@@ -94,11 +124,15 @@ export interface FileRoutesByTo {
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
   '/suppliers': typeof SuppliersRoute
   '/trust-center': typeof TrustCenterRoute
+  '/sources/database': typeof SourcesDatabaseRoute
+  '/sources/documents': typeof SourcesDocumentsRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/ai-audit-trail': typeof AiAuditTrailRoute
   '/ai-readiness': typeof AiReadinessRoute
+  '/ai-risk-assessment': typeof AiRiskAssessmentRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
@@ -107,12 +141,16 @@ export interface FileRoutesById {
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
   '/suppliers': typeof SuppliersRoute
   '/trust-center': typeof TrustCenterRoute
+  '/sources/database': typeof SourcesDatabaseRoute
+  '/sources/documents': typeof SourcesDocumentsRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/ai-audit-trail'
     | '/ai-readiness'
+    | '/ai-risk-assessment'
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
@@ -121,10 +159,14 @@ export interface FileRouteTypes {
     | '/security-questionnaire'
     | '/suppliers'
     | '/trust-center'
+    | '/sources/database'
+    | '/sources/documents'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/ai-audit-trail'
     | '/ai-readiness'
+    | '/ai-risk-assessment'
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
@@ -133,10 +175,14 @@ export interface FileRouteTypes {
     | '/security-questionnaire'
     | '/suppliers'
     | '/trust-center'
+    | '/sources/database'
+    | '/sources/documents'
   id:
     | '__root__'
     | '/'
+    | '/ai-audit-trail'
     | '/ai-readiness'
+    | '/ai-risk-assessment'
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
@@ -145,11 +191,15 @@ export interface FileRouteTypes {
     | '/security-questionnaire'
     | '/suppliers'
     | '/trust-center'
+    | '/sources/database'
+    | '/sources/documents'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AiAuditTrailRoute: typeof AiAuditTrailRoute
   AiReadinessRoute: typeof AiReadinessRoute
+  AiRiskAssessmentRoute: typeof AiRiskAssessmentRoute
   DataAuditingRoute: typeof DataAuditingRoute
   DatabaseMonitoringRoute: typeof DatabaseMonitoringRoute
   DocumentsRoute: typeof DocumentsRoute
@@ -158,6 +208,8 @@ export interface RootRouteChildren {
   SecurityQuestionnaireRoute: typeof SecurityQuestionnaireRoute
   SuppliersRoute: typeof SuppliersRoute
   TrustCenterRoute: typeof TrustCenterRoute
+  SourcesDatabaseRoute: typeof SourcesDatabaseRoute
+  SourcesDocumentsRoute: typeof SourcesDocumentsRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -169,11 +221,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/ai-audit-trail': {
+      id: '/ai-audit-trail'
+      path: '/ai-audit-trail'
+      fullPath: '/ai-audit-trail'
+      preLoaderRoute: typeof AiAuditTrailRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/ai-readiness': {
       id: '/ai-readiness'
       path: '/ai-readiness'
       fullPath: '/ai-readiness'
       preLoaderRoute: typeof AiReadinessRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/ai-risk-assessment': {
+      id: '/ai-risk-assessment'
+      path: '/ai-risk-assessment'
+      fullPath: '/ai-risk-assessment'
+      preLoaderRoute: typeof AiRiskAssessmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/data-auditing': {
@@ -232,12 +298,28 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof TrustCenterRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/sources/database': {
+      id: '/sources/database'
+      path: '/sources/database'
+      fullPath: '/sources/database'
+      preLoaderRoute: typeof SourcesDatabaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sources/documents': {
+      id: '/sources/documents'
+      path: '/sources/documents'
+      fullPath: '/sources/documents'
+      preLoaderRoute: typeof SourcesDocumentsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AiAuditTrailRoute: AiAuditTrailRoute,
   AiReadinessRoute: AiReadinessRoute,
+  AiRiskAssessmentRoute: AiRiskAssessmentRoute,
   DataAuditingRoute: DataAuditingRoute,
   DatabaseMonitoringRoute: DatabaseMonitoringRoute,
   DocumentsRoute: DocumentsRoute,
@@ -246,6 +328,8 @@ const rootRouteChildren: RootRouteChildren = {
   SecurityQuestionnaireRoute: SecurityQuestionnaireRoute,
   SuppliersRoute: SuppliersRoute,
   TrustCenterRoute: TrustCenterRoute,
+  SourcesDatabaseRoute: SourcesDatabaseRoute,
+  SourcesDocumentsRoute: SourcesDocumentsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
