@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as AiAuditTrailRouteImport } from './routes/ai-audit-trail'
 import { Route as AiReadinessRouteImport } from './routes/ai-readiness'
 import { Route as AiRiskAssessmentRouteImport } from './routes/ai-risk-assessment'
+import { Route as AuthRouteImport } from './routes/auth'
 import { Route as DataAuditingRouteImport } from './routes/data-auditing'
 import { Route as DatabaseMonitoringRouteImport } from './routes/database-monitoring'
 import { Route as DocumentsRouteImport } from './routes/documents'
@@ -54,6 +55,11 @@ const AiReadinessRoute = AiReadinessRouteImport.update({
 const AiRiskAssessmentRoute = AiRiskAssessmentRouteImport.update({
   id: '/ai-risk-assessment',
   path: '/ai-risk-assessment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
 const DataAuditingRoute = DataAuditingRouteImport.update({
@@ -172,6 +178,7 @@ export interface FileRoutesByFullPath {
   '/ai-audit-trail': typeof AiAuditTrailRoute
   '/ai-readiness': typeof AiReadinessRoute
   '/ai-risk-assessment': typeof AiRiskAssessmentRoute
+  '/auth': typeof AuthRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
@@ -200,6 +207,7 @@ export interface FileRoutesByTo {
   '/ai-audit-trail': typeof AiAuditTrailRoute
   '/ai-readiness': typeof AiReadinessRoute
   '/ai-risk-assessment': typeof AiRiskAssessmentRoute
+  '/auth': typeof AuthRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
@@ -229,6 +237,7 @@ export interface FileRoutesById {
   '/ai-audit-trail': typeof AiAuditTrailRoute
   '/ai-readiness': typeof AiReadinessRoute
   '/ai-risk-assessment': typeof AiRiskAssessmentRoute
+  '/auth': typeof AuthRoute
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
@@ -259,6 +268,7 @@ export interface FileRouteTypes {
     | '/ai-audit-trail'
     | '/ai-readiness'
     | '/ai-risk-assessment'
+    | '/auth'
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
@@ -287,6 +297,7 @@ export interface FileRouteTypes {
     | '/ai-audit-trail'
     | '/ai-readiness'
     | '/ai-risk-assessment'
+    | '/auth'
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
@@ -315,6 +326,7 @@ export interface FileRouteTypes {
     | '/ai-audit-trail'
     | '/ai-readiness'
     | '/ai-risk-assessment'
+    | '/auth'
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
@@ -344,6 +356,7 @@ export interface RootRouteChildren {
   AiAuditTrailRoute: typeof AiAuditTrailRoute
   AiReadinessRoute: typeof AiReadinessRoute
   AiRiskAssessmentRoute: typeof AiRiskAssessmentRoute
+  AuthRoute: typeof AuthRoute
   DataAuditingRoute: typeof DataAuditingRoute
   DatabaseMonitoringRoute: typeof DatabaseMonitoringRoute
   DocumentsRoute: typeof DocumentsRoute
@@ -396,6 +409,13 @@ declare module '@tanstack/react-router' {
       path: '/ai-risk-assessment'
       fullPath: '/ai-risk-assessment'
       preLoaderRoute: typeof AiRiskAssessmentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/data-auditing': {
@@ -560,6 +580,7 @@ const rootRouteChildren: RootRouteChildren = {
   AiAuditTrailRoute: AiAuditTrailRoute,
   AiReadinessRoute: AiReadinessRoute,
   AiRiskAssessmentRoute: AiRiskAssessmentRoute,
+  AuthRoute: AuthRoute,
   DataAuditingRoute: DataAuditingRoute,
   DatabaseMonitoringRoute: DatabaseMonitoringRoute,
   DocumentsRoute: DocumentsRoute,
