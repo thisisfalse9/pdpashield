@@ -39,6 +39,8 @@ export async function runAiPiiReview(input: { columns: { name: string; samples: 
   const result = streamText({
     model: provider.responses("openai/gpt-6-astra"),
     maxRetries: 0,
+    onChunk: ({ chunk }) => { if (chunk.type !== "text-delta" && chunk.type !== "reasoning-delta") console.log("[ai-pii] chunk", chunk.type); },
+    onFinish: () => console.log("[ai-pii] finish"),
     onError: ({ error }) => console.error("[ai-pii] stream", error instanceof Error ? error.message : JSON.stringify(error).slice(0, 500)),
     output: Output.object({ schema }),
     instructions:
