@@ -113,11 +113,7 @@ function DbSource() {
               Download setup script
             </a>
           </Button>
-          {ready && !session ? (
-            <Button asChild size="sm">
-              <a href="/auth">Sign in to Reload / Run scan</a>
-            </Button>
-          ) : (
+          {ready && !session ? null : (
             <>
               <Button variant="outline" size="sm" disabled={busy !== ""} onClick={() => void load()}>
                 <RefreshCw className="mr-2 h-4 w-4" />

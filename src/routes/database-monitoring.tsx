@@ -71,17 +71,7 @@ function Mon() {
         </Button>
       </>}>
 
-      {!ready ? null : !session ? (
-        <Notice>
-          Live monitoring reads a real database, so it is open to signed-in accounts only. The demo feed
-          below needs no account.
-          <div className="mt-2">
-            <Button asChild size="sm" variant="outline" onClick={() => rememberReturn("/database-monitoring")}>
-              <Link to="/auth">Sign in to monitor live</Link>
-            </Button>
-          </div>
-        </Notice>
-      ) : (
+      {!ready ? null : !session ? null : (
         <>
           {!scan && <Notice>Nothing has been scanned in this session yet. Run a scan to read the live database and record it in the audit trail.</Notice>}
           {liveTotals && (
