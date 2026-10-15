@@ -10,6 +10,7 @@ import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { findNav } from "./nav";
 import { resetDemo, setState, useStore, type Role } from "@/lib/store";
+import { signOut, useSession } from "@/lib/auth";
 import { toast } from "sonner";
 
 export function AppTopbar() {
@@ -18,6 +19,7 @@ export function AppTopbar() {
   const notices = useStore((s) => s.notices);
   const profile = useStore((s) => s.profile);
   const role = useStore((s) => s.role);
+  const { email, ready } = useSession();
   const unread = notices.filter((n) => !n.read).length;
   const initials = profile.name.split(" ").map((w) => w[0]).join("").slice(0, 2);
 
@@ -79,6 +81,19 @@ export function AppTopbar() {
                 <DropdownMenuRadioItem key={r} value={r}>{r}</DropdownMenuRadioItem>
               ))}
             </DropdownMenuRadioGroup>
+            <DropdownMenuSeparator />
+            {ready && email ? (
+              <>
+                <DropdownMenuLabel className="text-xs text-muted-foreground">Signed in as {email}</DropdownMenuLabel>
+                <DropdownMenuItem onSelect={(e) => e.preventDefault()} onClick={() => void signOut()}>
+                  Sign out
+                </DropdownMenuItem>
+              </>
+            ) : (
+              <DropdownMenuItem asChild>
+                <Link to="/auth">Sign in for live data</Link>
+              </DropdownMenuItem>
+            )}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild><Link to="/settings/profile">Profile & Account</Link></DropdownMenuItem>
             <DropdownMenuItem asChild><Link to="/settings/organisation">Organisation Settings</Link></DropdownMenuItem>

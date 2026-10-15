@@ -14,7 +14,42 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      db_audit_events: {
+        Row: {
+          action: string
+          actor_email: string
+          at: string
+          detail: string
+          findings: Json
+          id: string
+          table_name: string | null
+          target_host: string
+          user_id: string
+        }
+        Insert: {
+          action: string
+          actor_email?: string
+          at?: string
+          detail?: string
+          findings?: Json
+          id?: string
+          table_name?: string | null
+          target_host?: string
+          user_id: string
+        }
+        Update: {
+          action?: string
+          actor_email?: string
+          at?: string
+          detail?: string
+          findings?: Json
+          id?: string
+          table_name?: string | null
+          target_host?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
