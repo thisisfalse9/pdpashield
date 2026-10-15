@@ -107,6 +107,12 @@ function DbSource() {
       description="Live inventory from the database this workspace monitors. The sample tables below stay available for demos."
       actions={
         <>
+          <Button asChild variant="outline" size="sm">
+            <a href="/monitor-setup.sql" download>
+              <Download className="mr-2 h-4 w-4" />
+              Download setup script
+            </a>
+          </Button>
           <Button variant="outline" size="sm" disabled={!session || busy !== ""} onClick={() => void load()}>
             <RefreshCw className="mr-2 h-4 w-4" />
             Reload
