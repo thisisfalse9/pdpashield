@@ -71,6 +71,10 @@ function Audit() {
 
   useEffect(() => {
     if (session) void load();
+    else {
+      setLive([]);
+      setFailed(false);
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session]);
 

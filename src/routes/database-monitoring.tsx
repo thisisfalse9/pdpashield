@@ -1,5 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { AlertTriangle, Activity, Loader2, ShieldAlert, Zap } from "lucide-react";
 import { toast } from "sonner";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -26,6 +26,11 @@ function Mon() {
   const { session, ready } = useSession();
   const [scan, setScan] = useState<ScanOk | null>(null);
   const [busy, setBusy] = useState(false);
+
+  // Live findings come from a signed-in scan, so drop them when the session ends.
+  useEffect(() => {
+    if (!session) setScan(null);
+  }, [session]);
   const [user, setUser] = useState("all");
   const [table, setTable] = useState("all");
   const [risk, setRisk] = useState("all");

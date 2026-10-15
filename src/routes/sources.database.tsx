@@ -47,6 +47,10 @@ function DbSource() {
 
   useEffect(() => {
     if (session) void load();
+    else {
+      setInv(null);
+      setScan(null);
+    }
   }, [session, load]);
 
   const runScan = async () => {
