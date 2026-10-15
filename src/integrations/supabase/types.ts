@@ -14,6 +14,72 @@ export type Database = {
   }
   public: {
     Tables: {
+      client_contacts: {
+        Row: {
+          department: string | null
+          email: string | null
+          full_name: string
+          id: number
+          is_primary: boolean | null
+          mobile: string | null
+        }
+        Insert: {
+          department?: string | null
+          email?: string | null
+          full_name: string
+          id?: never
+          is_primary?: boolean | null
+          mobile?: string | null
+        }
+        Update: {
+          department?: string | null
+          email?: string | null
+          full_name?: string
+          id?: never
+          is_primary?: boolean | null
+          mobile?: string | null
+        }
+        Relationships: []
+      }
+      clients: {
+        Row: {
+          client_name: string
+          company_name: string | null
+          contact_email: string | null
+          contact_phone: string | null
+          date_of_birth: string | null
+          engagement: string | null
+          fee_sgd: number | null
+          home_address: string | null
+          id: number
+          nric: string | null
+        }
+        Insert: {
+          client_name: string
+          company_name?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          date_of_birth?: string | null
+          engagement?: string | null
+          fee_sgd?: number | null
+          home_address?: string | null
+          id?: never
+          nric?: string | null
+        }
+        Update: {
+          client_name?: string
+          company_name?: string | null
+          contact_email?: string | null
+          contact_phone?: string | null
+          date_of_birth?: string | null
+          engagement?: string | null
+          fee_sgd?: number | null
+          home_address?: string | null
+          id?: never
+          nric?: string | null
+        }
+        Relationships: []
+      }
       db_audit_events: {
         Row: {
           action: string
@@ -50,12 +116,117 @@ export type Database = {
         }
         Relationships: []
       }
+      engagements: {
+        Row: {
+          client_id: number | null
+          engagement_type: string | null
+          hours: number | null
+          id: number
+          partner_name: string | null
+          start_date: string | null
+        }
+        Insert: {
+          client_id?: number | null
+          engagement_type?: string | null
+          hours?: number | null
+          id?: never
+          partner_name?: string | null
+          start_date?: string | null
+        }
+        Update: {
+          client_id?: number | null
+          engagement_type?: string | null
+          hours?: number | null
+          id?: never
+          partner_name?: string | null
+          start_date?: string | null
+        }
+        Relationships: []
+      }
+      firm_settings: {
+        Row: {
+          key: string
+          updated_at: string | null
+          value: string | null
+        }
+        Insert: {
+          key: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Update: {
+          key?: string
+          updated_at?: string | null
+          value?: string | null
+        }
+        Relationships: []
+      }
+      invoices: {
+        Row: {
+          amount_sgd: number | null
+          client_id: number | null
+          gst_sgd: number | null
+          id: number
+          invoice_no: string
+          issued_on: string | null
+          status: string | null
+        }
+        Insert: {
+          amount_sgd?: number | null
+          client_id?: number | null
+          gst_sgd?: number | null
+          id?: never
+          invoice_no: string
+          issued_on?: string | null
+          status?: string | null
+        }
+        Update: {
+          amount_sgd?: number | null
+          client_id?: number | null
+          gst_sgd?: number | null
+          id?: never
+          invoice_no?: string
+          issued_on?: string | null
+          status?: string | null
+        }
+        Relationships: []
+      }
+      payroll: {
+        Row: {
+          bank_account: string | null
+          bank_name: string | null
+          employee_name: string
+          id: number
+          nric: string | null
+          pay_month: string | null
+          salary_sgd: number | null
+        }
+        Insert: {
+          bank_account?: string | null
+          bank_name?: string | null
+          employee_name: string
+          id?: never
+          nric?: string | null
+          pay_month?: string | null
+          salary_sgd?: number | null
+        }
+        Update: {
+          bank_account?: string | null
+          bank_name?: string | null
+          employee_name?: string
+          id?: never
+          nric?: string | null
+          pay_month?: string | null
+          salary_sgd?: number | null
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      pdpa_monitor_inventory: { Args: never; Returns: Json }
     }
     Enums: {
       [_ in never]: never

@@ -8,6 +8,13 @@
       "when": 1792099845540,
       "tag": "0000_create_db_audit_events",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792100483489,
+      "tag": "0001_verify_monitor_setup_sql",
+      "breakpoints": true
     }
   ]
 }
