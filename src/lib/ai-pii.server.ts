@@ -20,7 +20,7 @@ const schema = z.object({
 export type AiReview = z.infer<typeof schema>;
 
 export async function runAiPiiReview(input: { columns: { name: string; samples: string[] }[] }): Promise<AiReview> {
-  const apiKey = process.env.LOVABLE_API_KEY;
+  const apiKey = process.env["LOVABLE_API_KEY"];
   if (!apiKey) throw new Error("AI is not configured for this workspace.");
   let runId: string | undefined;
   const provider = createOpenAI({

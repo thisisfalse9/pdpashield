@@ -136,12 +136,12 @@ export function scoreDataset(rows: Row[], columns: string[], findings: Finding[]
   return { privacyRisk, dataQuality, aiReadiness, missingCells: missing };
 }
 
-export const SAMPLE_CSV = `client_name,email,phone,nric,company,engagement,fee_sgd
-Tan Wei Ming,weiming.tan@example.sg,+65 9123 4567,S1234567D,Lion City Traders Pte Ltd,Annual audit,8500
-Priya Raman,priya.r@example.com,8234 5678,T0123456G,Marina Bay Florist,Tax filing,1200
-Ahmad bin Ismail,ahmad.ismail@example.sg,9876 5432,S8765432A,Kampong Glam Cafe,Bookkeeping,2400
-Chloe Lim,,6345 1122,F1234567N,Orchard Design Studio,GST registration,650
-Rajesh Kumar,rajesh.k@example.net,+65 8111 2233,G7654321M,Jurong Logistics,Annual audit,12000
-Lee Hui Min,huimin.lee@example.sg,,S2345678B,Tiong Bahru Bakery,Payroll,1800
-Nur Aisyah,nur.aisyah@example.com,9001 2345,T1122334C,Bedok Tuition Centre,Tax filing,
-Marcus Ong,marcus.ong@example.sg,8899 7766,S3456789Z,Clarke Quay Events,Bookkeeping,3200`;
+export const SAMPLE_CSV = `client_name,email,phone,nric,home_address,dob,company,engagement,fee_sgd
+Tan Wei Ming,weiming.tan@example.sg,+65 9123 4567,S1234567D,"Blk 123 Bedok North Ave 3 #05-12 S460123",1985-03-14,Lion City Traders Pte Ltd,Annual audit,8500
+Priya Raman,priya.r@example.com,8234 5678,T0123456G,"45 Tampines St 21 S529393",1990-07-02,Marina Bay Florist,Tax filing,1200
+Ahmad bin Ismail,ahmad.ismail@example.sg,9876 5432,S8765432A,"Blk 9 Jalan Bukit Merah #12-01 S150009",1978-11-23,Kampong Glam Cafe,Bookkeeping,2400
+Chloe Lim,,6345 1122,F1234567N,"22 Holland Grove Rd S278801",1995-01-30,Orchard Design Studio,GST registration,650
+Rajesh Kumar,rajesh.k@example.net,+65 8111 2233,G7654321M,"Blk 301 Jurong East St 32 #08-44 S600301",1982-06-18,Jurong Logistics,Annual audit,12000
+Lee Hui Min,huimin.lee@example.sg,,S2345678B,"10 Tiong Bahru Rd S168732",1988-09-09,Tiong Bahru Bakery,Payroll,1800
+Nur Aisyah,nur.aisyah@example.com,9001 2345,T1122334C,"Blk 88 Bedok Reservoir Rd S470088",1993-12-05,Bedok Tuition Centre,Tax filing,
+Marcus Ong,marcus.ong@example.sg,8899 7766,S3456789Z,"5 Clarke Quay Ln S179024",1980-04-27,Clarke Quay Events,Bookkeeping,3200`;
