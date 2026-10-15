@@ -13,6 +13,7 @@ import { Page, Notice, ScoreRing, Status, fmtDate } from "@/components/app/kit";
 import { setState, today, uid, useCan, useStore } from "@/lib/store";
 import { calcScore, type Answer } from "@/lib/scoring";
 import { meta } from "@/lib/meta";
+import { CombinedCard } from "@/components/app/CombinedScoreCard";
 
 export const Route = createFileRoute("/pdpa-score")({
   head: () => meta("PDPA Score", "Self-assess PDPA obligations, attach evidence and track remediation."),
