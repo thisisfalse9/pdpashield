@@ -11,7 +11,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Page, Stat, Status, DemoBadge, Empty, fmtDate } from "@/components/app/kit";
-import { setState, today, uid, useCan, useStore, type Supplier } from "@/lib/store";
+import { setState, uid, useCan, useStore, type Supplier } from "@/lib/store";
 import { meta } from "@/lib/meta";
 
 export const Route = createFileRoute("/suppliers")({
@@ -72,7 +72,6 @@ function Suppliers() {
             {S("dpa", "DPA status", ["Signed", "Pending", "None"])}{S("review", "Security review", ["Not Started", "In Progress", "Completed"])}{S("risk", "Risk level", ["Low", "Medium", "High"])}{F("nextReview", "Next review date", "date")}</div>
           <DialogFooter><Button onClick={save}>Save</Button></DialogFooter></DialogContent>
       </Dialog>
-      <span className="hidden">{today()}</span>
     </Page>
   );
 }

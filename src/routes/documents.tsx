@@ -9,7 +9,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogDescription, DialogFooter } from "@/components/ui/dialog";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle } from "@/components/ui/alert-dialog";
-import { Page, Status, DemoBadge, Empty, fmtDate, downloadFile } from "@/components/app/kit";
+import { Page, Status, DemoBadge, Empty, fmtDate } from "@/components/app/kit";
 import { setState, today, uid, useCan, useStore, type Doc } from "@/lib/store";
 import { meta } from "@/lib/meta";
 
@@ -115,7 +115,6 @@ function Documents() {
           {preview?.content && preview.name.endsWith(".pdf") ? <iframe src={preview.content} className="h-96 w-full rounded border" title="preview" />
             : preview?.content && preview.name.endsWith(".csv") ? <pre className="max-h-96 overflow-auto rounded bg-muted p-3 text-xs">{atob(preview.content.split(",")[1] ?? "").slice(0, 4000)}</pre>
             : <Empty title="Preview not available">{preview?.demo ? "This is a demo record without a stored file." : "Inline preview is supported for PDF and CSV. Download to view."}</Empty>}
-          {preview && (preview.name.endsWith(".csv") || preview.name.endsWith(".xlsx")) && <Button variant="outline" onClick={() => downloadFile("x", "")} className="hidden" />}
         </DialogContent>
       </Dialog>
 
