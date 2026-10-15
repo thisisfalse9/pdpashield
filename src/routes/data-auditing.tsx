@@ -1,12 +1,12 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
-import { Download, Loader2, RefreshCw, Search } from "lucide-react";
+import { Activity, AlertTriangle, CheckCircle2, Download, FileText, Loader2, RefreshCw, Search, XCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@/components/ui/table";
-import { Page, DemoBadge, Notice, Status, Empty, downloadFile, toCsv } from "@/components/app/kit";
+import { Page, DemoBadge, Notice, Stat, Status, Empty, downloadFile, toCsv } from "@/components/app/kit";
 import { auditRecords } from "@/lib/demo-events";
 import { monitorAuditEvents } from "@/lib/dbmon.functions";
 import { useCan } from "@/lib/store";
@@ -100,6 +100,14 @@ function Audit() {
 
       {failed && <Notice tone="warning">Live records could not be loaded. The demo feed below is still available.</Notice>}
       <Notice tone="warning">Demo records are synthetic <b>Demo Data</b>. Live records are written by this workspace whenever a scan reads your database.</Notice>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <Stat label="Total records" value={all.length} icon={<FileText className="h-5 w-5" />} />
+        <Stat label="Flagged" value={all.filter((r) => r.decision === "Flagged").length} icon={<AlertTriangle className="h-5 w-5" />} tone="warning" />
+        <Stat label="Rejected" value={all.filter((r) => r.decision === "Rejected").length} icon={<XCircle className="h-5 w-5" />} tone="danger" />
+        <Stat label="Approved" value={all.filter((r) => r.decision === "Approved").length} icon={<CheckCircle2 className="h-5 w-5" />} tone="success" />
+        <Stat label="Live records" value={live.length} icon={<Activity className="h-5 w-5" />} />
+      </div>
 
       <Card className="shadow-card"><CardContent className="space-y-3 p-4">
         <div className="grid gap-2 sm:grid-cols-[1fr_170px_150px_150px_150px]">
