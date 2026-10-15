@@ -89,11 +89,7 @@ export function AppTopbar() {
                   Sign out
                 </DropdownMenuItem>
               </>
-            ) : (
-              <DropdownMenuItem asChild>
-                <Link to="/auth">Sign in for live data</Link>
-              </DropdownMenuItem>
-            )}
+            ) : null}
             <DropdownMenuSeparator />
             <DropdownMenuItem asChild><Link to="/settings/profile">Profile & Account</Link></DropdownMenuItem>
             <DropdownMenuItem asChild><Link to="/settings/organisation">Organisation Settings</Link></DropdownMenuItem>
