@@ -1,7 +1,7 @@
 // Heuristic PII detection for tabular data. Pattern-based: it WILL miss some
 // values and flag some false positives. Never present as perfectly accurate.
 
-export type PiiType = "name" | "email" | "phone" | "nric";
+export type PiiType = "name" | "email" | "phone" | "nric" | "other";
 export type Severity = "High" | "Medium" | "Low";
 export type MaskMode = "redact" | "partial" | "hash" | "keep";
 
@@ -10,6 +10,7 @@ export const PII_LABEL: Record<PiiType, string> = {
   email: "Email address",
   phone: "Phone number",
   nric: "NRIC / FIN-like ID",
+  other: "Other personal data",
 };
 
 export const PII_SEVERITY: Record<PiiType, Severity> = {
@@ -17,6 +18,7 @@ export const PII_SEVERITY: Record<PiiType, Severity> = {
   phone: "Medium",
   email: "Medium",
   name: "Low",
+  other: "Medium",
 };
 
 export const PII_ACTION: Record<PiiType, string> = {
@@ -24,6 +26,7 @@ export const PII_ACTION: Record<PiiType, string> = {
   phone: "Partially mask before analytics or AI use.",
   email: "Partially mask or pseudonymise.",
   name: "Pseudonymise or drop if not needed for the purpose.",
+  other: "Review and mask before AI use.",
 };
 
 const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -43,6 +46,8 @@ export function classifyValue(v: string): PiiType | null {
 export interface Finding {
   column: string;
   type: PiiType;
+  label?: string;
+  source?: "pattern" | "ai";
   count: number;
   severity: Severity;
   action: string;
@@ -85,6 +90,7 @@ export function maskValue(v: string, type: PiiType, mode: MaskMode): string {
     return (u?.[0] ?? "") + "***@" + (d ?? "");
   }
   if (type === "nric") return "*****" + v.slice(-4);
+  if (type === "other") return v.length <= 2 ? "**" : v[0] + "*".repeat(Math.min(8, v.length - 1));
   if (type === "phone") return v.replace(/\d(?=(?:\D*\d){4})/g, "*");
   return v
     .split(/\s+/)
@@ -98,7 +104,7 @@ export function maskRows(rows: Row[], findings: Finding[], modes: Record<string,
   const rank = { High: 3, Medium: 2, Low: 1 };
   for (const f of findings) {
     const cur = byCol.get(f.column);
-    if (!cur || rank[PII_SEVERITY[f.type]] > rank[PII_SEVERITY[cur]]) byCol.set(f.column, f.type);
+    if (!cur || rank[f.severity] > rank[PII_SEVERITY[cur]]) byCol.set(f.column, f.type);
   }
   return rows.map((r) => {
     const out: Row = { ...r };
@@ -130,12 +136,12 @@ export function scoreDataset(rows: Row[], columns: string[], findings: Finding[]
   return { privacyRisk, dataQuality, aiReadiness, missingCells: missing };
 }
 
-export const SAMPLE_CSV = `client_name,email,phone,nric,company,engagement,fee_sgd
-Tan Wei Ming,weiming.tan@example.sg,+65 9123 4567,S1234567D,Lion City Traders Pte Ltd,Annual audit,8500
-Priya Raman,priya.r@example.com,8234 5678,T0123456G,Marina Bay Florist,Tax filing,1200
-Ahmad bin Ismail,ahmad.ismail@example.sg,9876 5432,S8765432A,Kampong Glam Cafe,Bookkeeping,2400
-Chloe Lim,,6345 1122,F1234567N,Orchard Design Studio,GST registration,650
-Rajesh Kumar,rajesh.k@example.net,+65 8111 2233,G7654321M,Jurong Logistics,Annual audit,12000
-Lee Hui Min,huimin.lee@example.sg,,S2345678B,Tiong Bahru Bakery,Payroll,1800
-Nur Aisyah,nur.aisyah@example.com,9001 2345,T1122334C,Bedok Tuition Centre,Tax filing,
-Marcus Ong,marcus.ong@example.sg,8899 7766,S3456789Z,Clarke Quay Events,Bookkeeping,3200`;
+export const SAMPLE_CSV = `client_name,email,phone,nric,home_address,dob,company,engagement,fee_sgd
+Tan Wei Ming,weiming.tan@example.sg,+65 9123 4567,S1234567D,"Blk 123 Bedok North Ave 3 #05-12 S460123",1985-03-14,Lion City Traders Pte Ltd,Annual audit,8500
+Priya Raman,priya.r@example.com,8234 5678,T0123456G,"45 Tampines St 21 S529393",1990-07-02,Marina Bay Florist,Tax filing,1200
+Ahmad bin Ismail,ahmad.ismail@example.sg,9876 5432,S8765432A,"Blk 9 Jalan Bukit Merah #12-01 S150009",1978-11-23,Kampong Glam Cafe,Bookkeeping,2400
+Chloe Lim,,6345 1122,F1234567N,"22 Holland Grove Rd S278801",1995-01-30,Orchard Design Studio,GST registration,650
+Rajesh Kumar,rajesh.k@example.net,+65 8111 2233,G7654321M,"Blk 301 Jurong East St 32 #08-44 S600301",1982-06-18,Jurong Logistics,Annual audit,12000
+Lee Hui Min,huimin.lee@example.sg,,S2345678B,"10 Tiong Bahru Rd S168732",1988-09-09,Tiong Bahru Bakery,Payroll,1800
+Nur Aisyah,nur.aisyah@example.com,9001 2345,T1122334C,"Blk 88 Bedok Reservoir Rd S470088",1993-12-05,Bedok Tuition Centre,Tax filing,
+Marcus Ong,marcus.ong@example.sg,8899 7766,S3456789Z,"5 Clarke Quay Ln S179024",1980-04-27,Clarke Quay Events,Bookkeeping,3200`;
