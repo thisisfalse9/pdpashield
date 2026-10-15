@@ -12,6 +12,7 @@ const Input = z.object({
 export const aiPiiReview = createServerFn({ method: "POST" })
   .inputValidator((d: unknown) => Input.parse(d))
   .handler(async ({ data }) => {
+    console.log("[ai-pii] handler start", data.columns.length);
     const { runAiPiiReview } = await import("./ai-pii.server");
     try {
       return { ok: true as const, review: await runAiPiiReview({ columns: data.columns }) };
