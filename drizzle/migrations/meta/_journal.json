@@ -15,6 +15,13 @@
       "when": 1792100483489,
       "tag": "0001_verify_monitor_setup_sql",
       "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "7",
+      "when": 1792100722786,
+      "tag": "0002_label_monitor_verification_tables",
+      "breakpoints": true
     }
   ]
 }
