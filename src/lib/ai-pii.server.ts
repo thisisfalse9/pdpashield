@@ -73,8 +73,9 @@ export async function runAiPiiReview(input: { columns: { name: string; samples: 
       }
     }
     const msg = e instanceof Error ? e.message : String(e);
-    if (/402|credit/i.test(msg)) throw new Error("AI credits have run out for this workspace. Add credits in Settings → Plans & credits.");
-    if (/429|rate/i.test(msg)) throw new Error("The AI service is busy. Please wait a moment and try again.");
+    console.error("[ai-pii]", msg);
+    if (/\b402\b|insufficient credit/i.test(msg)) throw new Error("AI credits have run out for this workspace. Add credits in Settings → Plans & credits.");
+    if (/429|rate limit/i.test(msg)) throw new Error("The AI service is busy. Please wait a moment and try again.");
     throw new Error("AI review failed: " + msg.slice(0, 200));
   }
 }
