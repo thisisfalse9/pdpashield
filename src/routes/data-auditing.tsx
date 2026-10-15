@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Download, Loader2, RefreshCw, Search } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +10,7 @@ import { Page, DemoBadge, Notice, Status, Empty, downloadFile, toCsv } from "@/c
 import { auditRecords } from "@/lib/demo-events";
 import { monitorAuditEvents } from "@/lib/dbmon.functions";
 import { useCan } from "@/lib/store";
-import { rememberReturn, useSession } from "@/lib/auth";
+import { useSession } from "@/lib/auth";
 import { meta } from "@/lib/meta";
 
 export const Route = createFileRoute("/data-auditing")({
@@ -88,17 +88,7 @@ function Audit() {
     <Page title="Data Auditing" description="Live records from your own scans, plus the demo feed. For live alerts, see Database Monitoring."
       actions={<><DemoBadge /><Button variant="outline" disabled={!canExport || !rows.length} onClick={() => downloadFile("audit_records.csv", toCsv(rows.map(({ id, ...r }) => r)))}><Download className="mr-2 h-4 w-4" />Export CSV</Button></>}>
 
-      {!ready ? null : !session ? (
-        <Notice>
-          Live audit records are stored per signed-in account. Sign in to see your own scan history — the
-          demo feed below needs no account.
-          <div className="mt-2">
-            <Button asChild size="sm" variant="outline" onClick={() => rememberReturn("/data-auditing")}>
-              <Link to="/auth">Sign in to view live records</Link>
-            </Button>
-          </div>
-        </Notice>
-      ) : (
+      {!ready || !session ? null : (
         <div className="flex flex-wrap items-center gap-2">
           <Button variant="outline" size="sm" disabled={busy} onClick={() => void load()}>
             {busy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <RefreshCw className="mr-2 h-4 w-4" />}

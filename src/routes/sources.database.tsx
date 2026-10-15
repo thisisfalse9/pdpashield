@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { Download, Loader2, PlugZap, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Page, DemoBadge, Notice, Status, Stat, Empty } from "@/components/app/kit";
 import { monitorScan, monitorStatus } from "@/lib/dbmon.functions";
 import { scanTotals, type TableScan } from "@/lib/monitoring";
-import { rememberReturn, useSession } from "@/lib/auth";
+import { useSession } from "@/lib/auth";
 import { meta } from "@/lib/meta";
 
 export const Route = createFileRoute("/sources/database")({
@@ -124,17 +124,7 @@ function DbSource() {
         </>
       }
     >
-      {!ready ? null : !session ? (
-        <Notice>
-          Live monitoring reads a real database, so it is open to signed-in accounts only. The demo
-          inventory below needs no account.
-          <div className="mt-2">
-            <Button asChild size="sm" variant="outline" onClick={() => rememberReturn("/sources/database")}>
-              <Link to="/auth">Sign in to view live data</Link>
-            </Button>
-          </div>
-        </Notice>
-      ) : (
+      {!ready || !session ? null : (
         <>
           <div className="grid gap-4 sm:grid-cols-3">
             <Stat label="Tables found" value={totals ? totals.tables : (inventory?.length ?? "—")} />
