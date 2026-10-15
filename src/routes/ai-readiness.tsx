@@ -12,6 +12,11 @@ import { Page, Notice, ScoreRing, Status, Empty, downloadFile, fmtDate } from "@
 import { pushNotice, setState, uid, useStore } from "@/lib/store";
 import { detectPii, maskRows, scoreDataset, SAMPLE_CSV, PII_LABEL, type Finding, type MaskMode, type Row } from "@/lib/pii";
 import { meta } from "@/lib/meta";
+import { aiPiiReview } from "@/lib/ai-pii.functions";
+import { Checkbox } from "@/components/ui/checkbox";
+import { Sparkles } from "lucide-react";
+
+type AiCol = { column: string; piiType: string; severity: "High" | "Medium" | "Low" | "None"; confidence: number; reason: string; recommendation: string };
 
 export const Route = createFileRoute("/ai-readiness")({
   head: () => meta("AI Readiness Check", "Scan CSV/XLSX files for PII, mask it and export AI-ready data."),
@@ -33,10 +38,36 @@ function AiReadiness() {
   const [busy, setBusy] = useState(false);
   const [error, setError] = useState("");
   const ref = useRef<HTMLInputElement>(null);
+  const [consent, setConsent] = useState(false);
+  const [aiBusy, setAiBusy] = useState(false);
+  const [aiError, setAiError] = useState("");
+  const [ai, setAi] = useState<{ columns: AiCol[]; summary: string } | null>(null);
+
+  async function runAi() {
+    setAiBusy(true); setAiError("");
+    const columns = cols.map((c) => ({ name: c.slice(0, 200), samples: rows.map((r) => String(r[c] ?? "").trim()).filter(Boolean).slice(0, 10).map((v) => v.slice(0, 300)) }));
+    try {
+      const res = await aiPiiReview({ data: { consent: true, columns } });
+      if (!res.ok) { setAiError(res.error); return; }
+      setAi(res.review);
+      const known = new Set(findings.map((f) => f.column));
+      const extra: Finding[] = res.review.columns
+        .filter((c) => c.severity !== "None" && !known.has(c.column) && cols.includes(c.column))
+        .map((c) => ({ column: c.column, type: "other", label: c.piiType, source: "ai", count: rows.filter((r) => String(r[c.column] ?? "").trim()).length, severity: c.severity as Finding["severity"], action: c.recommendation }));
+      if (extra.length) {
+        setFindings((f) => [...f, ...extra]);
+        setModes((m) => ({ ...m, ...Object.fromEntries(extra.map((x) => [x.column, x.severity === "High" ? "redact" : "partial"])) }));
+        setMasked(null); setStep(3);
+      }
+      toast.success(extra.length ? `AI found ${extra.length} more sensitive column(s)` : "AI review complete — no extra sensitive columns found");
+    } catch (e) {
+      setAiError(e instanceof Error ? e.message : "AI review failed");
+    } finally { setAiBusy(false); }
+  }
 
   function load(name: string, data: Row[], columns: string[]) {
     if (!columns.length || !data.length) { setError("The dataset is empty — no rows or columns were found."); return; }
-    setFile(name); setRows(data); setCols(columns); setFindings([]); setMasked(null); setError(""); setStep(1);
+    setFile(name); setRows(data); setCols(columns); setFindings([]); setAi(null); setAiError(""); setMasked(null); setError(""); setStep(1);
     toast.success(`Loaded ${data.length} rows from ${name}`);
   }
 
@@ -107,7 +138,7 @@ function AiReadiness() {
   const preview = (masked ?? rows).slice(0, 6);
 
   return (
-    <Page title="AI Readiness Check" description="Upload → Scan → Review findings → Mask → Download. Processing happens entirely in your browser; nothing is sent to an AI service.">
+    <Page title="AI Readiness Check" description="Upload → Scan → Review findings → Mask → Download. Scanning runs in your browser. Optional AI review only runs with your consent.">
       <div className="flex flex-wrap gap-2">
         {STEPS.map((s, i) => (
           <div key={s} className={`flex items-center gap-2 rounded-full border px-3 py-1.5 text-xs font-medium ${step >= i ? "border-primary bg-primary text-primary-foreground" : "text-muted-foreground"}`}>
@@ -152,7 +183,7 @@ function AiReadiness() {
                 <TableHeader><TableRow><TableHead>Field</TableHead><TableHead>Detected type</TableHead><TableHead>Count</TableHead><TableHead>Severity</TableHead><TableHead>Recommended action</TableHead><TableHead>Masking</TableHead></TableRow></TableHeader>
                 <TableBody>{findings.map((f) => (
                   <TableRow key={f.column + f.type}>
-                    <TableCell className="font-mono text-xs">{f.column}</TableCell><TableCell>{PII_LABEL[f.type]}</TableCell><TableCell>{f.count}</TableCell><TableCell><Status value={f.severity} /></TableCell>
+                    <TableCell className="font-mono text-xs">{f.column}</TableCell><TableCell>{f.label ?? PII_LABEL[f.type]}{f.source === "ai" && <span className="ml-1.5 rounded bg-accent px-1.5 py-0.5 text-[10px] font-semibold text-accent-foreground">AI</span>}</TableCell><TableCell>{f.count}</TableCell><TableCell><Status value={f.severity} /></TableCell>
                     <TableCell className="max-w-xs text-xs text-muted-foreground">{f.action}</TableCell>
                     <TableCell><Select value={modes[f.column]} onValueChange={(v) => { setModes({ ...modes, [f.column]: v as MaskMode }); setStep(3); }}>
                       <SelectTrigger className="h-8 w-32"><SelectValue /></SelectTrigger>
@@ -163,6 +194,31 @@ function AiReadiness() {
               </Table>
             )}
             <p className="mt-3 text-xs text-muted-foreground">Detection is pattern-based and not perfectly accurate. It can miss PII or flag false positives — always review results.</p>
+          </CardContent>
+        </Card>
+      )}
+
+      {step >= 2 && (
+        <Card className="shadow-card">
+          <CardHeader><CardTitle className="flex items-center gap-2 text-base"><Sparkles className="h-4 w-4 text-brand" />AI-assisted review (optional)</CardTitle></CardHeader>
+          <CardContent className="space-y-4">
+            <p className="text-sm text-muted-foreground">Pattern matching only finds common formats. Lovable AI can read each column's name and up to 10 sample values to spot other personal data — addresses, dates of birth, bank accounts, salaries, health notes — and explain the risk.</p>
+            <label className="flex items-start gap-2 rounded-md border bg-warning-soft p-3 text-sm">
+              <Checkbox checked={consent} onCheckedChange={(v) => setConsent(!!v)} className="mt-0.5" />
+              <span>I consent to sending column names and up to 10 <b>unmasked</b> sample values per column ({cols.length} columns) to an external AI service for analysis. Only use this with synthetic data or data you are permitted to share.</span>
+            </label>
+            <Button disabled={!consent || aiBusy} onClick={runAi}>{aiBusy ? <Loader2 className="mr-2 h-4 w-4 animate-spin" /> : <Sparkles className="mr-2 h-4 w-4" />}{aiBusy ? "Analysing with AI…" : "Run AI review"}</Button>
+            {aiError && <p className="rounded-md bg-destructive-soft px-3 py-2 text-sm text-destructive">{aiError}</p>}
+            {ai && (
+              <div className="space-y-3">
+                <p className="rounded-md bg-accent p-3 text-sm text-accent-foreground">{ai.summary}</p>
+                <div className="overflow-x-auto"><Table><TableHeader><TableRow><TableHead>Column</TableHead><TableHead>AI classification</TableHead><TableHead>Severity</TableHead><TableHead>Confidence</TableHead><TableHead>Why</TableHead><TableHead>Recommendation</TableHead></TableRow></TableHeader>
+                  <TableBody>{ai.columns.map((c) => (
+                    <TableRow key={c.column}><TableCell className="font-mono text-xs">{c.column}</TableCell><TableCell>{c.piiType}</TableCell><TableCell><Status value={c.severity === "None" ? "N/A" : c.severity} /></TableCell><TableCell>{Math.round(c.confidence * 100)}%</TableCell><TableCell className="max-w-xs text-xs text-muted-foreground">{c.reason}</TableCell><TableCell className="max-w-xs text-xs">{c.recommendation}</TableCell></TableRow>
+                  ))}</TableBody></Table></div>
+                <p className="text-xs text-muted-foreground">AI output can be wrong. New sensitive columns were added to the masking table above — review them before applying masking.</p>
+              </div>
+            )}
           </CardContent>
         </Card>
       )}
@@ -190,7 +246,7 @@ function AiReadiness() {
           ))}
         </CardContent>
       </Card>
-      <Notice>Your files never leave this browser. No data is sent to external AI services.</Notice>
+      <Notice>Pattern scanning and masking run entirely in your browser. Data is only sent to AI if you tick the consent box and run the AI review.</Notice>
     </Page>
   );
 }

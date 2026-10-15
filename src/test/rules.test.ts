@@ -36,3 +36,9 @@ describe("AI risk", () => {
     expect(riskScore(2, 4).level).toBe("Medium");
   });
 });
+
+describe("masking other personal data", () => {
+  it("partial mask keeps only first character", () => {
+    expect(maskValue("Blk 123 Bedok", "other", "partial")).toBe("B********");
+  });
+});
