@@ -68,7 +68,7 @@ export const monitorAuditEvents = createServerFn({ method: "GET" })
   .handler(async ({ context }) => {
     const { data } = await context.supabase
       .from("db_audit_events")
-      .select("id, action, table_name, detail, target_host, at, findings")
+      .select("id, actor_email, action, table_name, detail, target_host, at, findings")
       .order("at", { ascending: false })
       .limit(100);
     return { events: data ?? [] };

@@ -78,10 +78,10 @@ describe("live database monitoring", () => {
 
   it("masks personal data before it leaves the server", () => {
     const scan = scanTable(PAYROLL, 6, PAYROLL_ROWS);
-    expect(scan.maskedSamples[0]!.nric).toBe("[REDACTED]");
-    expect(scan.maskedSamples[0]!.bank_account).toBe("[REDACTED]");
-    expect(scan.maskedSamples[0]!.salary_sgd).toBe("4***");
-    expect(scan.maskedSamples[0]!.pay_month).toBe("2026-09");
+    expect(scan.maskedSamples[0]!["nric"]).toBe("[REDACTED]");
+    expect(scan.maskedSamples[0]!["bank_account"]).toBe("[REDACTED]");
+    expect(scan.maskedSamples[0]!["salary_sgd"]).toBe("4***");
+    expect(scan.maskedSamples[0]!["pay_month"]).toBe("2026-09");
   });
 
   it("raises the highest alert for the NRIC column", () => {
@@ -126,7 +126,7 @@ describe("live database monitoring", () => {
 
   it("summarises a scan for the audit trail", () => {
     const scans = [scanTable(PAYROLL, 6, PAYROLL_ROWS)];
-    expect(scanSummary(scans)).toBe("1 tables, 6 rows, 3 personal-data columns (2 high risk)");
+    expect(scanSummary(scans)).toBe("1 tables, 6 rows, 4 personal-data columns (2 high risk)");
   });
 
   it("hides most of the project reference when showing the target", () => {
