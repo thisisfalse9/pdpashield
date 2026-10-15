@@ -101,6 +101,14 @@ function Audit() {
       {failed && <Notice tone="warning">Live records could not be loaded. The demo feed below is still available.</Notice>}
       <Notice tone="warning">Demo records are synthetic <b>Demo Data</b>. Live records are written by this workspace whenever a scan reads your database.</Notice>
 
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5">
+        <Stat label="Total records" value={all.length} icon={<FileText className="h-5 w-5" />} />
+        <Stat label="Flagged" value={all.filter((r) => r.decision === "Flagged").length} icon={<AlertTriangle className="h-5 w-5" />} tone="warning" />
+        <Stat label="Rejected" value={all.filter((r) => r.decision === "Rejected").length} icon={<XCircle className="h-5 w-5" />} tone="danger" />
+        <Stat label="Approved" value={all.filter((r) => r.decision === "Approved").length} icon={<CheckCircle2 className="h-5 w-5" />} tone="success" />
+        <Stat label="Live records" value={live.length} icon={<Activity className="h-5 w-5" />} />
+      </div>
+
       <Card className="shadow-card"><CardContent className="space-y-3 p-4">
         <div className="grid gap-2 sm:grid-cols-[1fr_170px_150px_150px_150px]">
           <div className="relative"><Search className="absolute left-3 top-2.5 h-4 w-4 text-muted-foreground" /><Input className="pl-9" placeholder="Search user, action, table…" value={q} onChange={(e) => setQ(e.target.value)} /></div>
