@@ -41,17 +41,12 @@ export async function runAiPiiReview(input: { columns: { name: string; samples: 
     maxRetries: 0,
     onError: ({ error }) => console.error("[ai-pii] stream", error instanceof Error ? error.message : JSON.stringify(error).slice(0, 500)),
     output: Output.object({ schema }),
-    messages: [
-      {
-        role: "system",
-        content:
+    instructions:
           "You are a Singapore PDPA data-protection analyst reviewing a tabular dataset from an accounting firm before it is used for analytics or AI. " +
           "For EVERY column, classify the kind of personal data it holds (e.g. person name, email, phone, NRIC/FIN, passport, date of birth, home address, postal code, bank account, salary/income, health, religion/race, IP address, free-text with possible PII, company info, financial amount, none). " +
           "Severity: High for NRIC/FIN/passport, bank/financial account, health, salary, or data that enables identity theft; Medium for direct contact identifiers (email, phone, address, DOB); Low for names or quasi-identifiers; None for non-personal columns. " +
           "Confidence is 0-1. Reason must cite what you saw in the samples (do not repeat full sensitive values). Recommendation must be one short, practical action referencing PDPA/PDPC guidance where relevant. Summary: 2 sentences on overall AI readiness. Be honest about uncertainty.",
-      },
-      { role: "user", content: JSON.stringify(input) },
-    ],
+    messages: [{ role: "user", content: JSON.stringify(input) }],
     providerOptions: {
       openai: {
         forceReasoning: true,
