@@ -16,6 +16,7 @@ import { Route as AiRiskAssessmentRouteImport } from './routes/ai-risk-assessmen
 import { Route as DataAuditingRouteImport } from './routes/data-auditing'
 import { Route as DatabaseMonitoringRouteImport } from './routes/database-monitoring'
 import { Route as DocumentsRouteImport } from './routes/documents'
+import { Route as ModelMonitoringRouteImport } from './routes/model-monitoring'
 import { Route as PdpaScoreRouteImport } from './routes/pdpa-score'
 import { Route as PoliciesRouteImport } from './routes/policies'
 import { Route as SecurityQuestionnaireRouteImport } from './routes/security-questionnaire'
@@ -23,6 +24,11 @@ import { Route as SuppliersRouteImport } from './routes/suppliers'
 import { Route as TrustCenterRouteImport } from './routes/trust-center'
 import { Route as SourcesDatabaseRouteImport } from './routes/sources.database'
 import { Route as SourcesDocumentsRouteImport } from './routes/sources.documents'
+import { Route as SubscriptionIndexRouteImport } from './routes/subscription.index'
+import { Route as SubscriptionInvoicesRouteImport } from './routes/subscription.invoices'
+import { Route as SubscriptionPlansRouteImport } from './routes/subscription.plans'
+import { Route as SubscriptionSeatsRouteImport } from './routes/subscription.seats'
+import { Route as SubscriptionUsageRouteImport } from './routes/subscription.usage'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -57,6 +63,11 @@ const DatabaseMonitoringRoute = DatabaseMonitoringRouteImport.update({
 const DocumentsRoute = DocumentsRouteImport.update({
   id: '/documents',
   path: '/documents',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ModelMonitoringRoute = ModelMonitoringRouteImport.update({
+  id: '/model-monitoring',
+  path: '/model-monitoring',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PdpaScoreRoute = PdpaScoreRouteImport.update({
@@ -94,6 +105,31 @@ const SourcesDocumentsRoute = SourcesDocumentsRouteImport.update({
   path: '/sources/documents',
   getParentRoute: () => rootRouteImport,
 } as any)
+const SubscriptionIndexRoute = SubscriptionIndexRouteImport.update({
+  id: '/subscription/',
+  path: '/subscription/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionInvoicesRoute = SubscriptionInvoicesRouteImport.update({
+  id: '/subscription/invoices',
+  path: '/subscription/invoices',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionPlansRoute = SubscriptionPlansRouteImport.update({
+  id: '/subscription/plans',
+  path: '/subscription/plans',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionSeatsRoute = SubscriptionSeatsRouteImport.update({
+  id: '/subscription/seats',
+  path: '/subscription/seats',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SubscriptionUsageRoute = SubscriptionUsageRouteImport.update({
+  id: '/subscription/usage',
+  path: '/subscription/usage',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -103,6 +139,7 @@ export interface FileRoutesByFullPath {
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
+  '/model-monitoring': typeof ModelMonitoringRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
@@ -110,6 +147,11 @@ export interface FileRoutesByFullPath {
   '/trust-center': typeof TrustCenterRoute
   '/sources/database': typeof SourcesDatabaseRoute
   '/sources/documents': typeof SourcesDocumentsRoute
+  '/subscription/invoices': typeof SubscriptionInvoicesRoute
+  '/subscription/plans': typeof SubscriptionPlansRoute
+  '/subscription/seats': typeof SubscriptionSeatsRoute
+  '/subscription/usage': typeof SubscriptionUsageRoute
+  '/subscription/': typeof SubscriptionIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -119,6 +161,7 @@ export interface FileRoutesByTo {
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
+  '/model-monitoring': typeof ModelMonitoringRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
@@ -126,6 +169,11 @@ export interface FileRoutesByTo {
   '/trust-center': typeof TrustCenterRoute
   '/sources/database': typeof SourcesDatabaseRoute
   '/sources/documents': typeof SourcesDocumentsRoute
+  '/subscription/invoices': typeof SubscriptionInvoicesRoute
+  '/subscription/plans': typeof SubscriptionPlansRoute
+  '/subscription/seats': typeof SubscriptionSeatsRoute
+  '/subscription/usage': typeof SubscriptionUsageRoute
+  '/subscription': typeof SubscriptionIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -136,6 +184,7 @@ export interface FileRoutesById {
   '/data-auditing': typeof DataAuditingRoute
   '/database-monitoring': typeof DatabaseMonitoringRoute
   '/documents': typeof DocumentsRoute
+  '/model-monitoring': typeof ModelMonitoringRoute
   '/pdpa-score': typeof PdpaScoreRoute
   '/policies': typeof PoliciesRoute
   '/security-questionnaire': typeof SecurityQuestionnaireRoute
@@ -143,6 +192,11 @@ export interface FileRoutesById {
   '/trust-center': typeof TrustCenterRoute
   '/sources/database': typeof SourcesDatabaseRoute
   '/sources/documents': typeof SourcesDocumentsRoute
+  '/subscription/invoices': typeof SubscriptionInvoicesRoute
+  '/subscription/plans': typeof SubscriptionPlansRoute
+  '/subscription/seats': typeof SubscriptionSeatsRoute
+  '/subscription/usage': typeof SubscriptionUsageRoute
+  '/subscription/': typeof SubscriptionIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -154,6 +208,7 @@ export interface FileRouteTypes {
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
+    | '/model-monitoring'
     | '/pdpa-score'
     | '/policies'
     | '/security-questionnaire'
@@ -161,6 +216,11 @@ export interface FileRouteTypes {
     | '/trust-center'
     | '/sources/database'
     | '/sources/documents'
+    | '/subscription/invoices'
+    | '/subscription/plans'
+    | '/subscription/seats'
+    | '/subscription/usage'
+    | '/subscription/'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -170,6 +230,7 @@ export interface FileRouteTypes {
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
+    | '/model-monitoring'
     | '/pdpa-score'
     | '/policies'
     | '/security-questionnaire'
@@ -177,6 +238,11 @@ export interface FileRouteTypes {
     | '/trust-center'
     | '/sources/database'
     | '/sources/documents'
+    | '/subscription/invoices'
+    | '/subscription/plans'
+    | '/subscription/seats'
+    | '/subscription/usage'
+    | '/subscription'
   id:
     | '__root__'
     | '/'
@@ -186,6 +252,7 @@ export interface FileRouteTypes {
     | '/data-auditing'
     | '/database-monitoring'
     | '/documents'
+    | '/model-monitoring'
     | '/pdpa-score'
     | '/policies'
     | '/security-questionnaire'
@@ -193,6 +260,11 @@ export interface FileRouteTypes {
     | '/trust-center'
     | '/sources/database'
     | '/sources/documents'
+    | '/subscription/invoices'
+    | '/subscription/plans'
+    | '/subscription/seats'
+    | '/subscription/usage'
+    | '/subscription/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -203,6 +275,7 @@ export interface RootRouteChildren {
   DataAuditingRoute: typeof DataAuditingRoute
   DatabaseMonitoringRoute: typeof DatabaseMonitoringRoute
   DocumentsRoute: typeof DocumentsRoute
+  ModelMonitoringRoute: typeof ModelMonitoringRoute
   PdpaScoreRoute: typeof PdpaScoreRoute
   PoliciesRoute: typeof PoliciesRoute
   SecurityQuestionnaireRoute: typeof SecurityQuestionnaireRoute
@@ -210,6 +283,11 @@ export interface RootRouteChildren {
   TrustCenterRoute: typeof TrustCenterRoute
   SourcesDatabaseRoute: typeof SourcesDatabaseRoute
   SourcesDocumentsRoute: typeof SourcesDocumentsRoute
+  SubscriptionInvoicesRoute: typeof SubscriptionInvoicesRoute
+  SubscriptionPlansRoute: typeof SubscriptionPlansRoute
+  SubscriptionSeatsRoute: typeof SubscriptionSeatsRoute
+  SubscriptionUsageRoute: typeof SubscriptionUsageRoute
+  SubscriptionIndexRoute: typeof SubscriptionIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -263,6 +341,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/model-monitoring': {
+      id: '/model-monitoring'
+      path: '/model-monitoring'
+      fullPath: '/model-monitoring'
+      preLoaderRoute: typeof ModelMonitoringRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/pdpa-score': {
       id: '/pdpa-score'
       path: '/pdpa-score'
@@ -312,6 +397,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof SourcesDocumentsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/subscription/': {
+      id: '/subscription/'
+      path: '/subscription'
+      fullPath: '/subscription/'
+      preLoaderRoute: typeof SubscriptionIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/invoices': {
+      id: '/subscription/invoices'
+      path: '/subscription/invoices'
+      fullPath: '/subscription/invoices'
+      preLoaderRoute: typeof SubscriptionInvoicesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/plans': {
+      id: '/subscription/plans'
+      path: '/subscription/plans'
+      fullPath: '/subscription/plans'
+      preLoaderRoute: typeof SubscriptionPlansRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/seats': {
+      id: '/subscription/seats'
+      path: '/subscription/seats'
+      fullPath: '/subscription/seats'
+      preLoaderRoute: typeof SubscriptionSeatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/subscription/usage': {
+      id: '/subscription/usage'
+      path: '/subscription/usage'
+      fullPath: '/subscription/usage'
+      preLoaderRoute: typeof SubscriptionUsageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -323,6 +443,7 @@ const rootRouteChildren: RootRouteChildren = {
   DataAuditingRoute: DataAuditingRoute,
   DatabaseMonitoringRoute: DatabaseMonitoringRoute,
   DocumentsRoute: DocumentsRoute,
+  ModelMonitoringRoute: ModelMonitoringRoute,
   PdpaScoreRoute: PdpaScoreRoute,
   PoliciesRoute: PoliciesRoute,
   SecurityQuestionnaireRoute: SecurityQuestionnaireRoute,
@@ -330,6 +451,11 @@ const rootRouteChildren: RootRouteChildren = {
   TrustCenterRoute: TrustCenterRoute,
   SourcesDatabaseRoute: SourcesDatabaseRoute,
   SourcesDocumentsRoute: SourcesDocumentsRoute,
+  SubscriptionInvoicesRoute: SubscriptionInvoicesRoute,
+  SubscriptionPlansRoute: SubscriptionPlansRoute,
+  SubscriptionSeatsRoute: SubscriptionSeatsRoute,
+  SubscriptionUsageRoute: SubscriptionUsageRoute,
+  SubscriptionIndexRoute: SubscriptionIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
