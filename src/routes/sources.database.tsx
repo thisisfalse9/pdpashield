@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useCallback, useEffect, useState } from "react";
 import { Download, Loader2, PlugZap, RefreshCw } from "lucide-react";
 import { toast } from "sonner";
@@ -8,7 +8,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Page, DemoBadge, Notice, Status, Stat, Empty } from "@/components/app/kit";
 import { monitorScan, monitorStatus } from "@/lib/dbmon.functions";
 import { scanTotals, type TableScan } from "@/lib/monitoring";
-import { rememberReturn, useSession } from "@/lib/auth";
+import { useSession } from "@/lib/auth";
 import { meta } from "@/lib/meta";
 
 export const Route = createFileRoute("/sources/database")({

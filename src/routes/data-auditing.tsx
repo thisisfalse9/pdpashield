@@ -1,4 +1,4 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import { Download, Loader2, RefreshCw, Search } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
@@ -10,7 +10,7 @@ import { Page, DemoBadge, Notice, Status, Empty, downloadFile, toCsv } from "@/c
 import { auditRecords } from "@/lib/demo-events";
 import { monitorAuditEvents } from "@/lib/dbmon.functions";
 import { useCan } from "@/lib/store";
-import { rememberReturn, useSession } from "@/lib/auth";
+import { useSession } from "@/lib/auth";
 import { meta } from "@/lib/meta";
 
 export const Route = createFileRoute("/data-auditing")({
