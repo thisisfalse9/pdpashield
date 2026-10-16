@@ -96,4 +96,14 @@ export const seed = (): State => ({
     { id: "n3", at: "2026-10-09T09:12:00Z", title: "Scan found 412 NRIC values in Client List Q3.csv", read: true, kind: "scan" },
   ],
   sessionTimeout: 30,
+  monthlyReports: [
+    ["2026-09", 64, 78, 80, 72, 3, "Retention schedule drafted; DPO review pending."],
+    ["2026-08", 61, 74, 76, 68, 4, "Vendor DPAs collected for 3 of 5 suppliers."],
+    ["2026-07", 57, 70, 71, 64, 5, "Started masking NRIC in client exports."],
+    ["2026-06", 55, 66, 69, 61, 6, ""],
+  ].map(([month, manual, monitoring, auditing, overall, openTasks, note]) => ({
+    month: month as string, manual: manual as number, monitoring: monitoring as number, auditing: auditing as number, overall: overall as number,
+    weights: { manual: 50, monitoring: 25, auditing: 25 }, answered: 10, totalControls: 10, openTasks: openTasks as number,
+    note: note as string, savedBy: "Priya Raman", savedAt: `${month}-28`,
+  })),
 });
