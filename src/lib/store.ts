@@ -65,7 +65,7 @@ export interface State {
 
 import { seed } from "./seed";
 
-const KEY = "pdpa-shield-demo-v1";
+const KEY = "pdpa-shield-demo-v2"; // v2: profile name updated from "Harry Tan" to "Harry"
 let state: State = seed();
 const listeners = new Set<() => void>();
 let hydrated = false;
