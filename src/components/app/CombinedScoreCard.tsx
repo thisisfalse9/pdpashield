@@ -5,6 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { DemoBadge, ScoreRing } from "@/components/app/kit";
 import { auditingScore, combinedScore, DEFAULT_WEIGHTS, monitoringScore, type ScoreWeights } from "@/lib/scoring";
 import { auditRecords, dbEvents } from "@/lib/demo-events";
+import { SaveMonthButton } from "@/components/app/MonthlyReports";
 
 export function CombinedCard({ manual }: { manual: number }) {
   const [w, setW] = useState<ScoreWeights>(DEFAULT_WEIGHTS);
@@ -20,7 +21,8 @@ export function CombinedCard({ manual }: { manual: number }) {
     <Card className="shadow-card">
       <CardHeader className="flex flex-row flex-wrap items-center justify-between gap-2 space-y-0">
         <CardTitle className="text-base">Overall PDPA score</CardTitle>
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
+          <SaveMonthButton parts={parts} weights={w} overall={total} />
           <Button size="sm" variant="outline" onClick={() => setW(DEFAULT_WEIGHTS)}>Weighted 50/25/25</Button>
           <Button size="sm" variant="outline" onClick={() => setW({ manual: 1, monitoring: 1, auditing: 1 })}>Direct (equal)</Button>
         </div>

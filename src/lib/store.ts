@@ -61,6 +61,7 @@ export interface State {
   notifyPrefs: Record<string, { inApp: boolean; email: boolean }>;
   notices: Notice[];
   sessionTimeout: number;
+  monthlyReports: import("./reports").MonthlyReport[];
 }
 
 import { seed } from "./seed";
