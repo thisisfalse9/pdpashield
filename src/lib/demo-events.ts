@@ -1,5 +1,5 @@
 // Deterministic synthetic events. Always labelled Demo Data in the UI.
-const USERS = ["harry.tan", "priya.r", "huimin.lee", "marcus.ong", "svc_reporting", "svc_backup"];
+const USERS = ["harry", "priya.r", "huimin.lee", "marcus.ong", "svc_reporting", "svc_backup"];
 const TABLES = ["clients", "client_contacts", "payroll", "invoices", "engagements", "staff"];
 const ACTIONS = ["SELECT", "UPDATE", "INSERT", "DELETE", "EXPORT"];
 
