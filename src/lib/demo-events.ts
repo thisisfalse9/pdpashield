@@ -48,7 +48,7 @@ export interface ModelEvent { id: string; at: string; model: string; version: st
 export const MODELS = [
   { name: "Invoice Classifier", version: "1.2.0", owner: "Priya Raman", status: "Production" },
   { name: "Receipt OCR Extractor", version: "0.9.3", owner: "Lee Hui Min", status: "Staging" },
-  { name: "Client Risk Scorer", version: "0.4.1", owner: "Harry Tan", status: "Under Review" },
+  { name: "Client Risk Scorer", version: "0.4.1", owner: "Harry", status: "Under Review" },
   { name: "Email Triage Assistant", version: "2.0.0", owner: "Marcus Ong", status: "Retired" },
 ];
 export function modelEvents(): ModelEvent[] {

@@ -9,18 +9,18 @@ export const PLANS = {
 
 export const seed = (): State => ({
   role: "Admin",
-  profile: { name: "Harry Tan", email: "harry@tanco-accounting.sg", lang: "English", dateFormat: "DD/MM/YYYY" },
+  profile: { name: "Harry", email: "harry@tanco-accounting.sg", lang: "English", dateFormat: "DD/MM/YYYY" },
   org: { name: "Tan & Co Accounting (Demo)", uen: "201912345K", industry: "Accounting & Audit", size: "11-25", timezone: "Asia/Singapore", currency: "SGD", retentionMonths: 60 },
   docs: [
     { id: "d1", name: "Client Onboarding Form.pdf", category: "Forms", owner: "Priya Raman", version: "v3", uploaded: "2026-09-12", status: "Reviewed", size: 184000, links: ["Data Protection Policy", "Client consent"], demo: true },
-    { id: "d2", name: "Xero DPA 2026.pdf", category: "Contracts", owner: "Harry Tan", version: "v1", uploaded: "2026-08-03", status: "Reviewed", size: 402000, links: ["Supplier: Xero"], demo: true },
+    { id: "d2", name: "Xero DPA 2026.pdf", category: "Contracts", owner: "Harry", version: "v1", uploaded: "2026-08-03", status: "Reviewed", size: 402000, links: ["Supplier: Xero"], demo: true },
     { id: "d3", name: "Payroll Register Sep.xlsx", category: "Records", owner: "Lee Hui Min", version: "v1", uploaded: "2026-10-01", status: "Pending Review", size: 96000, links: ["AI Readiness scan"], demo: true },
-    { id: "d4", name: "Retention Schedule.docx", category: "Policies", owner: "Harry Tan", version: "v2", uploaded: "2026-06-20", status: "Expired", size: 51000, links: ["Retention Policy"], demo: true },
+    { id: "d4", name: "Retention Schedule.docx", category: "Policies", owner: "Harry", version: "v2", uploaded: "2026-06-20", status: "Expired", size: 51000, links: ["Retention Policy"], demo: true },
     { id: "d5", name: "Client List Q3.csv", category: "Records", owner: "Marcus Ong", version: "v1", uploaded: "2026-10-09", status: "Pending Review", size: 22000, links: [], demo: true },
   ],
   policies: [
-    { id: "p1", title: "Data Protection Policy", owner: "Harry Tan", roles: ["All staff"], status: "Published", effective: "2026-01-01", version: 3, body: "This policy sets out how Tan & Co collects, uses and discloses personal data in line with the PDPA.", controls: ["c1", "c2"], comments: [], history: [{ version: 1, at: "2024-03-01", note: "Initial" }, { version: 2, at: "2025-01-10", note: "Added DNC section" }, { version: 3, at: "2026-01-01", note: "Annual review" }], demo: true },
-    { id: "p2", title: "Data Breach Management Plan", owner: "Priya Raman", roles: ["DPO", "Partners"], status: "Pending Approval", effective: "2026-11-01", version: 2, body: "Steps to assess, contain and notify PDPC within 3 calendar days for notifiable breaches.", controls: ["c6"], comments: [{ by: "Harry Tan", text: "Add escalation contacts.", at: "2026-10-10" }], history: [{ version: 1, at: "2025-05-01", note: "Initial" }, { version: 2, at: "2026-10-08", note: "Updated timelines" }], demo: true },
+    { id: "p1", title: "Data Protection Policy", owner: "Harry", roles: ["All staff"], status: "Published", effective: "2026-01-01", version: 3, body: "This policy sets out how Tan & Co collects, uses and discloses personal data in line with the PDPA.", controls: ["c1", "c2"], comments: [], history: [{ version: 1, at: "2024-03-01", note: "Initial" }, { version: 2, at: "2025-01-10", note: "Added DNC section" }, { version: 3, at: "2026-01-01", note: "Annual review" }], demo: true },
+    { id: "p2", title: "Data Breach Management Plan", owner: "Priya Raman", roles: ["DPO", "Partners"], status: "Pending Approval", effective: "2026-11-01", version: 2, body: "Steps to assess, contain and notify PDPC within 3 calendar days for notifiable breaches.", controls: ["c6"], comments: [{ by: "Harry", text: "Add escalation contacts.", at: "2026-10-10" }], history: [{ version: 1, at: "2025-05-01", note: "Initial" }, { version: 2, at: "2026-10-08", note: "Updated timelines" }], demo: true },
     { id: "p3", title: "Retention & Disposal Policy", owner: "Lee Hui Min", roles: ["All staff"], status: "Draft", effective: "", version: 1, body: "Records are retained for 5 years after engagement ends, then securely disposed.", controls: ["c5"], comments: [], history: [{ version: 1, at: "2026-10-02", note: "Draft" }], demo: true },
   ],
   controls: [
@@ -39,8 +39,8 @@ export const seed = (): State => ({
   evidence: { c1: "DPO appointment letter.pdf" },
   reviewerNotes: {},
   assessments: [
-    { id: "a1", at: "2026-04-01", score: 52, by: "Harry Tan" },
-    { id: "a2", at: "2026-06-01", score: 58, by: "Harry Tan" },
+    { id: "a1", at: "2026-04-01", score: 52, by: "Harry" },
+    { id: "a2", at: "2026-06-01", score: 58, by: "Harry" },
     { id: "a3", at: "2026-08-01", score: 63, by: "Priya Raman" },
     { id: "a4", at: "2026-10-01", score: 68, by: "Priya Raman" },
   ],
@@ -48,7 +48,7 @@ export const seed = (): State => ({
   tasks: [
     { id: "t1", title: "Implement secure disposal of expired client files", owner: "Lee Hui Min", due: "2026-10-31", done: false, control: "c5" },
     { id: "t2", title: "Replace NRIC field with last-4 on onboarding form", owner: "Priya Raman", due: "2026-11-15", done: false, control: "c9" },
-    { id: "t3", title: "Run breach tabletop exercise", owner: "Harry Tan", due: "2026-11-30", done: false, control: "c6" },
+    { id: "t3", title: "Run breach tabletop exercise", owner: "Harry", due: "2026-11-30", done: false, control: "c6" },
   ],
   scans: [
     { id: "s1", at: "2026-10-09T09:12:00Z", file: "Client List Q3.csv", rows: 412, findings: 1236, privacyRisk: 78, dataQuality: 91, aiReadiness: 56, masked: false },
@@ -79,7 +79,7 @@ export const seed = (): State => ({
   plan: "starter",
   billing: "monthly",
   members: [
-    { id: "m1", name: "Harry Tan", email: "harry@tanco-accounting.sg", role: "Admin", status: "Active" },
+    { id: "m1", name: "Harry", email: "harry@tanco-accounting.sg", role: "Admin", status: "Active" },
     { id: "m2", name: "Priya Raman", email: "priya@tanco-accounting.sg", role: "DPO", status: "Active" },
     { id: "m3", name: "Lee Hui Min", email: "huimin@tanco-accounting.sg", role: "Compliance Officer", status: "Active" },
     { id: "m4", name: "Marcus Ong", email: "marcus@tanco-accounting.sg", role: "Business User", status: "Invited" },
